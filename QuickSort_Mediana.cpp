@@ -1,31 +1,8 @@
-#include "QuickSort.hpp"
+#include "QuickSort_Mediana.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
-QuickSort::QuickSort(string nome_quick) {
-    this->nome_quick = nome_quick;
-}
-
-void Particao_Recursivo(int Esq, int Dir, int *i, int *j, int *A) {
-    int x, w;
-    *i = Esq; *j = Dir;
-    x = A[(*i + *j)/2]; /* obtem o pivo x */
-    do
-    {
-        while (x > A[*i]) (*i)++;
-        while (x < A[*j]) (*j)--;
-        if (*i <= *j)
-        {
-            w = A[*i]; A[*i] = A[*j]; A[*j] = w;
-            (*i)++; (*j)--;
-        }
-    } while (*i <= *j);
-}
-
-void Ordena_Recursivo(int Esq, int Dir, int *A){ 
-    int i, j;
-    Particao_Recursivo(Esq, Dir, &i, &j, A);
-    if (Esq < j) Ordena_Recursivo(Esq, j, A);
-    if (i < Dir) Ordena_Recursivo(i, Dir, A);
-}
+QuickSort_Mediana::QuickSort_Mediana(){ }
 
 //função auxiliar para realizar as trocas de elementos
 void swap(int A[], int i, int j){
@@ -34,7 +11,7 @@ void swap(int A[], int i, int j){
     A[j] = temp;
 }
 
-int Particao_Mediana(int A[], int inicio, int fim) {
+int partition(int A[], int inicio, int fim) {
     //procura a mediana entre inicio, meio e fim
     int meio = (inicio + fim) / 2;
     int a = A[inicio];
@@ -92,23 +69,14 @@ int Particao_Mediana(int A[], int inicio, int fim) {
     swap(A, i + 1, fim);
     return i + 1; //retorna a posição do pivô
 }
-
-void QuickSort::Print() {
-    printf("QuickSort\n");
-}
-
-void QuickSort::Chama_QuickSort(int inicio, int *A, int n){
-    if(nome_quick=="QuicksortRecursivo: quicksort"){
-        Ordena_Recursivo(0, n-1, A);
-    }
-    else if(nome_quick=="QuicksortMediana"){
-        if (0<n) {
-            //realiza a partição
-            int q = Particao_Mediana(A, 0, n);
-            //ordena a partição esquerda
-            Chama_QuickSort(0, A, q-1);
-            //ordena a partição direita
-            Chama_QuickSort(q+1, A, n);
-    }
+//Quicksort mediana de três
+void QuickSort_Mediana::Chama(int A[], int inicio, int fim) {
+    if (inicio < fim) {
+        //realiza a partição
+        int q = partition(A, inicio, fim);
+        //ordena a partição esquerda
+        Chama(A, inicio, q - 1);
+        //ordena a partição direita
+        Chama(A, q + 1, fim);
     }
 }

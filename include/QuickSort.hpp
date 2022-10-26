@@ -2,11 +2,15 @@
 #define QUICKSORT_H
 
 #include <stdio.h>
+#include <iostream>
+using namespace std;
 
 class QuickSort{
+    private:
+        string nome_quick;
     public:
-        QuickSort();
-        void Chama_QuickSort(int *A, int n);
+        QuickSort(string nome_quick);
+        void Chama_QuickSort(int inicio, int *A, int n);
         void Print();
 };
 
