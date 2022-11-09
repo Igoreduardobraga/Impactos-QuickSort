@@ -9,9 +9,11 @@ class QuickSort{
     private:
         string nome_quick;
     public:
-        QuickSort(string nome_quick);
-        void Chama_QuickSort(int inicio, int *A, int n);
+        QuickSort();
+        void Chama_QuickSort_Recursivo(int inicio, int *A, int n);
         void Print();
+        void QuickSortNaoRec(int A, int n);
+        void Chama_QuickSort_Mediana(int inicio, int A[], int fim);
 };
 
 #endif

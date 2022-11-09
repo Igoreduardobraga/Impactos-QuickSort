@@ -1,10 +1,12 @@
 #include "QuickSort.hpp"
+#include "Pilha.hpp"
+#include "TipoItem.hpp"
 
-QuickSort::QuickSort(string nome_quick) {
-    this->nome_quick = nome_quick;
-}
+QuickSort::QuickSort() { }
 
-void Particao_Recursivo(int Esq, int Dir, int *i, int *j, int *A) {
+//************************************QUICKSORT RECURSIVO******************************************//
+
+void Particao(int Esq, int Dir, int *i, int *j, int *A) {
     int x, w;
     *i = Esq; *j = Dir;
     x = A[(*i + *j)/2]; /* obtem o pivo x */
@@ -22,10 +24,16 @@ void Particao_Recursivo(int Esq, int Dir, int *i, int *j, int *A) {
 
 void Ordena_Recursivo(int Esq, int Dir, int *A){ 
     int i, j;
-    Particao_Recursivo(Esq, Dir, &i, &j, A);
+    Particao(Esq, Dir, &i, &j, A);
     if (Esq < j) Ordena_Recursivo(Esq, j, A);
     if (i < Dir) Ordena_Recursivo(i, Dir, A);
 }
+
+void QuickSort::Chama_QuickSort_Recursivo(int inicio, int *A, int n){
+    Ordena_Recursivo(0, n-1, A);
+}
+
+//************************************QUICKSORT MEDIANA******************************************//
 
 //função auxiliar para realizar as trocas de elementos
 void swap(int A[], int i, int j){
@@ -71,9 +79,7 @@ int Particao_Mediana(int A[], int inicio, int fim) {
     }
     //coloca o elemento da mediana no fim para poder usar o Quicksort de Cormen
     swap(A, medianaIndice, fim);
-        
-    //*******************ALGORITMO DE PARTIÇÃO DE CORMEN*********************
-    //o pivo é o elemento final
+
     int pivo = A[fim];
     int i = inicio - 1;
     int j;
@@ -93,22 +99,50 @@ int Particao_Mediana(int A[], int inicio, int fim) {
     return i + 1; //retorna a posição do pivô
 }
 
-void QuickSort::Print() {
-    printf("QuickSort\n");
+void QuickSort::Chama_QuickSort_Mediana(int inicio, int A[], int fim) {
+    if (inicio < fim) {
+        //realiza a partição
+        int q = Particao_Mediana(A, inicio, fim);
+        //ordena a partição esquerda
+        Chama_QuickSort_Mediana(inicio, A, q - 1);
+        //ordena a partição direita
+        Chama_QuickSort_Mediana(q + 1, A, fim);
+    }
 }
 
-void QuickSort::Chama_QuickSort(int inicio, int *A, int n){
-    if(nome_quick=="QuicksortRecursivo: quicksort"){
-        Ordena_Recursivo(0, n-1, A);
-    }
-    else if(nome_quick=="QuicksortMediana"){
-        if (0<n) {
-            //realiza a partição
-            int q = Particao_Mediana(A, 0, n);
-            //ordena a partição esquerda
-            Chama_QuickSort(0, A, q-1);
-            //ordena a partição direita
-            Chama_QuickSort(q+1, A, n);
-    }
-    }
+//************************************QUICKSORT NAO RECURSIVO******************************************//
+
+void QuickSort::QuickSortNaoRec(int A, int n){
+    Pilha pilha;
+    TipoItem item; // campos esq e dir
+    int esq, dir, i, j;
+    FPVazia(&pilha);
+    esq = 0;
+    dir = n-1;
+    item.dir = dir;
+    item.esq = esq;
+    Empilha(item, &pilha);
+
+    do{
+        if (dir > esq) {
+        Particao(esq,dir,&i,&j,A);
+            if ((j-esq)>(dir-i)) {
+                item.dir = j;
+                item.esq = esq;
+                Empilha(item, &pilha);
+                esq = i;
+            }
+            else {
+                item.esq = i;
+                item.dir = dir;
+                Empilha(item, &pilha);
+                dir = j;
+            }
+        }
+        else{
+            Desempilha(&pilha,&item);
+            dir = item.dir;
+            esq = item.esq;
+        }
+    } while(!Vazia(pilha));
 }

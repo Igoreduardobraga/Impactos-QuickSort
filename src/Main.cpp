@@ -6,11 +6,9 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    QuickSort R("QuicksortRecursivo: quicksort");
-    QuickSort M("QuicksortMediana");
-    //QuickSort_Mediana L;
+    QuickSort M;
     int *A = new int[30];
-    srand(time(0));
+    //srand(time(0));
 
     for(int i=0 ; i<30 ; i++)
         A[i] = rand()%100;
@@ -18,13 +16,28 @@ int main(int argc, char *argv[]) {
     for(int i=0 ; i<30 ; i++)
         cout << A[i] << " ";
 
+    cout << endl;
+
+    int *B = new int[30];
+
+    for(int i=0 ; i<30 ; i++){
+        B[i] = A[i];
+        cout << B[i] << " ";
+    }
+
     cout << "\n\n";
 
-    //R.Chama_QuickSort(0,A,30);
-    M.Chama_QuickSort(0,A,30);
+    M.Chama_QuickSort_Recursivo(0,A,30);
+    M.Chama_QuickSort_Mediana(0,B,30);
     for(int i=0 ; i<30 ; i++)
         cout << A[i] << " ";
 
     cout << "\n";
+
+    for(int i=0 ; i<30 ; i++)
+        cout << B[i] << " ";
+
+    delete [] A;
+    delete [] B;
     return 0;
 }
