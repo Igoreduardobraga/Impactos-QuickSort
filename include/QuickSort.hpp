@@ -6,10 +6,8 @@
 using namespace std;
 
 class QuickSort{
-    private:
-        string nome_quick;
     public:
-        QuickSort();
+        QuickSort(int n);
         void Chama_QuickSort_Recursivo(int inicio, int *A, int n);
         void Print();
         void QuickSortNaoRec(int A, int n);

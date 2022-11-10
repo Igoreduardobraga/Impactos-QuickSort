@@ -1,8 +1,18 @@
 #include "QuickSort.hpp"
 #include "Pilha.hpp"
 #include "TipoItem.hpp"
+#include "Metricas.hpp"
 
-QuickSort::QuickSort() { }
+Metricas metricas_QSR;
+Metricas metricas_QRNR;
+Metricas metricas_QSM;
+
+QuickSort::QuickSort(int n){
+    registro = new Registro*[n];
+    for(int i=0 ; i<n ;i++){
+        
+    }
+}
 
 //************************************QUICKSORT RECURSIVO******************************************//
 
@@ -12,10 +22,18 @@ void Particao(int Esq, int Dir, int *i, int *j, int *A) {
     x = A[(*i + *j)/2]; /* obtem o pivo x */
     do
     {
-        while (x > A[*i]) (*i)++;
-        while (x < A[*j]) (*j)--;
+        metricas_QSR.Comparacoes++;
+        while (x > A[*i]){
+            (*i)++;
+            metricas_QSR.Comparacoes++;
+        }
+        while (x < A[*j]){
+            (*j)--;
+            metricas_QSR.Comparacoes++;
+        }
         if (*i <= *j)
         {
+            metricas_QSR.Comparacoes++;
             w = A[*i]; A[*i] = A[*j]; A[*j] = w;
             (*i)++; (*j)--;
         }
@@ -25,8 +43,14 @@ void Particao(int Esq, int Dir, int *i, int *j, int *A) {
 void Ordena_Recursivo(int Esq, int Dir, int *A){ 
     int i, j;
     Particao(Esq, Dir, &i, &j, A);
-    if (Esq < j) Ordena_Recursivo(Esq, j, A);
-    if (i < Dir) Ordena_Recursivo(i, Dir, A);
+    if (Esq < j){
+        Ordena_Recursivo(Esq, j, A);
+        metricas_QSR.Comparacoes++;
+    }
+    if (i < Dir) {
+        Ordena_Recursivo(i, Dir, A);
+        metricas_QSR.Comparacoes++;
+    }
 }
 
 void QuickSort::Chama_QuickSort_Recursivo(int inicio, int *A, int n){
@@ -50,30 +74,38 @@ int Particao_Mediana(int A[], int inicio, int fim) {
     int c = A[fim];
     int medianaIndice; //índice da mediana
     //A sequência de if...else a seguir verifica qual é a mediana
+    metricas_QSM.Comparacoes++;
     if (a < b) {
+        metricas_QSM.Comparacoes++;
         if (b < c) {
             //a < b && b < c
             medianaIndice = meio;
+            metricas_QSM.Comparacoes++;
         } else {
             if (a < c) {
                 //a < c && c <= b
                 medianaIndice = fim;
+                metricas_QSM.Comparacoes++;
             } else {
                 //c <= a && a < b
                 medianaIndice = inicio;
+                metricas_QSM.Comparacoes++;
             }
         }
     } else {
         if (c < b) {
             //c < b && b <= a
             medianaIndice = meio;
+            metricas_QSM.Comparacoes++;
         } else {
             if (c < a) {
                 //b <= c && c < a
                 medianaIndice = fim;
+                metricas_QSM.Comparacoes++;
             } else {
                 //b <= a && a <= c
                 medianaIndice = inicio;
+                metricas_QSM.Comparacoes++;
             }
         }
     }
@@ -90,6 +122,7 @@ int Particao_Mediana(int A[], int inicio, int fim) {
      */
     for (j = inicio; j <= fim - 1; j++) {
         if (A[j] <= pivo) {
+            metricas_QSM.Comparacoes++;
             i = i + 1;
             swap(A, i, j);
         }
@@ -101,6 +134,7 @@ int Particao_Mediana(int A[], int inicio, int fim) {
 
 void QuickSort::Chama_QuickSort_Mediana(int inicio, int A[], int fim) {
     if (inicio < fim) {
+        metricas_QSM.Comparacoes++;
         //realiza a partição
         int q = Particao_Mediana(A, inicio, fim);
         //ordena a partição esquerda
