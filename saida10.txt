@@ -1,0 +1,35 @@
+QuickSort 1000:
+Numero de comparacoes: 14800
+Numero de atribuicoes: 7659
+Tempo de processamento: 0.005206
+
+QuickSort 5000:
+Numero de comparacoes: 102080
+Numero de atribuicoes: 54435
+Tempo de processamento: 0.00753
+
+QuickSort 10000:
+Numero de comparacoes: 286148
+Numero de atribuicoes: 154758
+Tempo de processamento: 0.011184
+
+QuickSort 50000:
+Numero de comparacoes: 1388948
+Numero de atribuicoes: 736722
+Tempo de processamento: 0.03218
+
+QuickSort 100000:
+Numero de comparacoes: 3720886
+Numero de atribuicoes: 1969602
+Tempo de processamento: 0.071751
+
+QuickSort 500000:
+Numero de comparacoes: 17072570
+Numero de atribuicoes: 8934873
+Tempo de processamento: 0.27012
+
+QuickSort 1000000:
+Numero de comparacoes: 44647876
+Numero de atribuicoes: 23618490
+Tempo de processamento: 0.67494
+

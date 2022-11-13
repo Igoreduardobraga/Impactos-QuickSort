@@ -1,6 +1,9 @@
 #ifndef MERGESORT_H
 #define MERGESORT_H
 
+using namespace std;
+#include <iostream>
+
 class MergeSort{
     private:
 

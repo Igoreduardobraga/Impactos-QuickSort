@@ -1,5 +1,4 @@
 #include "MergeSort.hpp"
-using namespace std;
 
 void MergeSort::merge(int arr[], int p, int q, int r) {
   

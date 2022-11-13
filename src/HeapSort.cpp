@@ -1,6 +1,6 @@
 #include "HeapSort.hpp"
 
-void HeapSort::Constroi(Item *A, int n) {
+void HeapSort::Constroi(Registro *A, int n) {
     int Esq;
     Esq = n / 2 + 1;
     while (Esq > 1) {
@@ -9,16 +9,16 @@ void HeapSort::Constroi(Item *A, int n) {
     }
 }
 
-void HeapSort::Refaz(int Esq, int Dir, Item *A){
+void HeapSort::Refaz(int Esq, int Dir, Registro *A){
     int i, j;
-    Item x;
+    Registro x;
     i = Esq;
     j = i * 2;
     x = A[i];
     while (j <= Dir){
         if (j < Dir)
-        if (A[j].Chave < A[j+1].Chave) j++;
-        if (x.Chave >= A[j].Chave) break;
+        if (A[j].key < A[j+1].key) j++;
+        if (x.key >= A[j].key) break;
         A[i] = A[j];
         i = j;
         j = i *2;

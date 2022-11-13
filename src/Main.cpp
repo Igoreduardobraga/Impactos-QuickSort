@@ -1,8 +1,10 @@
 #include "QuickSort.hpp"
 #include "memlog.h"
+#include "Registro.hpp"
 #include "msgassert.h"
 //#include "QuickSort_Mediana.hpp"
 #include <fstream>
+#include <sys/resource.h>
 #include <iostream>
 #include <getopt.h>
 #include <string.h>
@@ -15,7 +17,7 @@ bool ativamem;
 char lognome[100];
 int algoritmo;
 
-void AnalisaComando(int argc,char ** argv){
+void AnalisaComando(int argc, char ** argv){
     // Descrição: analisa a linha de comando a partir do arc e agrv
 
     // Variavel externa do getopt
@@ -30,13 +32,10 @@ void AnalisaComando(int argc,char ** argv){
     // Inicializa lognome
     lognome[0] = 0;
 
-    while ((opcao = getopt(argc, argv, "p:li:o:")) != EOF){
+    while ((opcao = getopt(argc, argv, "p:li:o:v:s:")) != EOF){
        switch(opcao) {
             case 'p':
                 strcpy(lognome,optarg);
-                break;
-            case 's':
-                semente = atoi(optarg);
                 break;
             case 'l':
                 ativamem = 1;
@@ -49,6 +48,9 @@ void AnalisaComando(int argc,char ** argv){
                 break;
             case 'v':
                 algoritmo = atoi(optarg);
+            case 's':
+                semente = atoi(optarg);
+                break;
             default:
                 exit(1);
        }
@@ -60,17 +62,14 @@ void AnalisaComando(int argc,char ** argv){
     erroAssert(strlen(lognome)>0, "main - nome de arquivo de registro de acesso tem que ser definido");
 }
 
-void criaSemente(){
-    //Decrição: Configura a semente usada para gerar os numeros aleatórios
-
-    srand(semente);
-}
-
 int main(int argc, char *argv[]) {
 
-    unsigned int soma_testes = 0;
-    unsigned int qntd_valores;
-    unsigned int n;
+    struct rusage resources;
+    int rc;
+    double utime, stime, total_time;
+    int qntd_valores;
+    int n;
+    QuickSort quicksort;
 
     AnalisaComando(argc,argv);
 
@@ -85,14 +84,14 @@ int main(int argc, char *argv[]) {
         desativaMemLog();
     }
 
-    criaSemente();
+    srand(semente);
 
     ifstream entrada;
     entrada.open(arquivo_entrada, std::ios::in);
     erroAssert(entrada.is_open(), "Não foi possivel abrir o arquivo de entrada");
 
     ofstream saida;
-    saida.open(arquivo_saida, ios::app);
+    saida.open(arquivo_saida, ios::out);
     erroAssert(saida.is_open(), "Não foi possivel abrir o arquivo de entrada");
 
     entrada >> qntd_valores;
@@ -100,55 +99,46 @@ int main(int argc, char *argv[]) {
     //Percorre o arquivo baseado na quantidade de testes existentes
     for(int i=0 ; i<qntd_valores ; i++){
         entrada >> n;
-        Registro registro = new Registro[n];
+        Registro *registro = new Registro[n];
         for(int k=0 ; k<n ; k++){
             registro[k].key = rand();
         }
-    }
 
-    switch (algoritmo){
-        case 1:
-            
+        for(int k=0 ; k<n ; k++){
+            cout << registro[k].key << " ";
+        }
+        cout << endl;
+
+        switch (algoritmo){
+            case 1:
+                quicksort.Chama_QuickSort_Recursivo(0, registro, n);
+                break;
+            case 2:
+                quicksort.Chama_QuickSort_Mediana(0, registro, n);
+                break;
+            case 3:
                 
-            break;
-    
-    default:
-        break;
+                break;
+            case 4:
+                quicksort.QuickSortNaoRec(registro, 0, n);
+                break;
+
+            default:
+                break;
+        }
+
+        if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
+            perror("getrusage falhou");
+        
+        utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
+        stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
+        total_time = utime+stime;
+
+        quicksort.imprime_Metricas(algoritmo, &saida, n);
+        saida << "Tempo de processamento: " << total_time << endl  << endl;
+
+        delete [] registro;
     }
-
-    QuickSort M;
-    int *A = new int[30];
-    //srand(time(0));
-
-    for(int i=0 ; i<30 ; i++)
-        A[i] = rand()%100;
-    
-    for(int i=0 ; i<30 ; i++)
-        cout << A[i] << " ";
-
-    cout << endl;
-
-    int *B = new int[30];
-
-    for(int i=0 ; i<30 ; i++){
-        B[i] = A[i];
-        cout << B[i] << " ";
-    }
-
-    cout << "\n\n";
-
-    M.Chama_QuickSort_Recursivo(0,A,30);
-    M.Chama_QuickSort_Mediana(0,B,30);
-    for(int i=0 ; i<30 ; i++)
-        cout << A[i] << " ";
-
-    cout << "\n";
-
-    for(int i=0 ; i<30 ; i++)
-        cout << B[i] << " ";
-
-    delete [] A;
-    delete [] B;
 
     desativaMemLog();
     entrada.close();
