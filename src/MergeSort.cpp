@@ -7,10 +7,17 @@ void MergeSort::merge(int arr[], int p, int q, int r) {
 
     int L[n1], M[n2];
 
-    for (int i = 0; i < n1; i++)
-    L[i] = arr[p + i];
-    for (int j = 0; j < n2; j++)
-    M[j] = arr[q + 1 + j];
+    for (int i = 0; i < n1; i++){
+        metricas_MergeSort.Comparacoes++;
+        L[i] = arr[p + i];
+        metricas_MergeSort.Atribuicoes++;
+    }
+
+    for (int j = 0; j < n2; j++){
+        metricas_MergeSort.Comparacoes++;
+        M[j] = arr[q + 1 + j];
+        metricas_MergeSort.Atribuicoes++;
+    }
 
     int i, j, k;
     i = 0;
@@ -18,31 +25,39 @@ void MergeSort::merge(int arr[], int p, int q, int r) {
     k = p;
 
     while (i < n1 && j < n2) {
+        metricas_MergeSort.Comparacoes++;
     if (L[i] <= M[j]) {
+        metricas_MergeSort.Comparacoes++;
         arr[k] = L[i];
         i++;
     } else {
         arr[k] = M[j];
+        metricas_MergeSort.Atribuicoes++;
         j++;
     }
     k++;
     }
 
     while (i < n1) {
-    arr[k] = L[i];
-    i++;
-    k++;
+        metricas_MergeSort.Comparacoes++;
+        arr[k] = L[i];
+        metricas_MergeSort.Atribuicoes++;
+        i++;
+        k++;
     }
 
     while (j < n2) {
-    arr[k] = M[j];
-    j++;
-    k++;
+        metricas_MergeSort.Comparacoes++;
+        arr[k] = M[j];
+        metricas_MergeSort.Atribuicoes++;
+        j++;
+        k++;
     }
 }
 
 void MergeSort::mergeSort(int arr[], int l, int r) {
     if (l < r) {
+        metricas_MergeSort.Comparacoes++;
         int m = l + (r - l) / 2;
 
         mergeSort(arr, l, m);

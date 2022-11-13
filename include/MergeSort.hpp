@@ -2,10 +2,12 @@
 #define MERGESORT_H
 
 using namespace std;
+#include "Metricas.hpp"
 #include <iostream>
 
 class MergeSort{
     private:
+        Metricas metricas_MergeSort;
 
     public:
         MergeSort();
