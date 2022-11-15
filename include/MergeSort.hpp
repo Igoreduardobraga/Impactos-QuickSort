@@ -4,6 +4,7 @@
 using namespace std;
 #include "Metricas.hpp"
 #include <iostream>
+#include <fstream>
 
 class MergeSort{
     private:
@@ -13,7 +14,7 @@ class MergeSort{
         MergeSort();
         void merge(int arr[], int p, int q, int r);
         void mergeSort(int arr[], int l, int r);
-        void imprimirArray(int arr[], int size);
+        void imprimir_metricas(ofstream *saida, int n); 
 };
 
 #endif

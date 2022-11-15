@@ -3,35 +3,39 @@
 
 QuickSort::QuickSort(){  }
 
-// QuickSort::QuickSort(int n){
-//     registro = new Registro*[n];
-//     for(int i=0 ; i<n ;i++){
-        
-//     }
-// }
+void QuickSort::Troca(Registro* a, Registro* b){
+    //Descricao:: Realiza a troca de posição
+
+    Registro t = *a;
+    *a = *b;
+    *b = t;
+    metricas.Atribuicoes+=3;
+}
 
 //************************************QUICKSORT RECURSIVO******************************************//
 
 void QuickSort::Particao(int Esq, int Dir, int *i, int *j, Registro *A) {
+    //Descricao:: Realiza a partição do algoritmo QuickSort Recursivo
+
     Registro x, w;
     *i = Esq; *j = Dir;
     x = A[(*i + *j)/2]; /* obtem o pivo x */
     do
     {
-        metricas_QSR.Comparacoes++;
-        while (x > A[*i]){
+        metricas.Comparacoes++;
+        while (x.key > A[*i].key){
             (*i)++;
-            metricas_QSR.Comparacoes++;
+            metricas.Comparacoes++;
         }
-        while (x < A[*j]){
+        while (x.key < A[*j].key){
             (*j)--;
-            metricas_QSR.Comparacoes++;
+            metricas.Comparacoes++;
         }
         if (*i <= *j)
         {
-            metricas_QSR.Comparacoes++;
+            metricas.Comparacoes++;
             w = A[*i]; A[*i] = A[*j]; A[*j] = w;
-            metricas_QSR.Atribuicoes+=3;
+            metricas.Atribuicoes+=3;
             (*i)++; (*j)--;
         }
     } while (*i <= *j);
@@ -42,135 +46,142 @@ void QuickSort::Ordena_Recursivo(int Esq, int Dir, Registro *A){
     Particao(Esq, Dir, &i, &j, A);
     if (Esq < j){
         Ordena_Recursivo(Esq, j, A);
-        metricas_QSR.Comparacoes++;
+        metricas.Comparacoes++;
     }
     if (i < Dir) {
         Ordena_Recursivo(i, Dir, A);
-        metricas_QSR.Comparacoes++;
+        metricas.Comparacoes++;
     }
 }
 
-void QuickSort::Chama_QuickSort_Recursivo(int inicio, Registro *A, int n){
+void QuickSort::QuickSort_Recursivo(Registro *A, int n){
+    //Descricao: Chamada do algoritmo QuickSort Recursivo
+
+    //Inicializa as comparacoes e atribuicoes
+    metricas.Comparacoes=0;
+    metricas.Atribuicoes=0;
     Ordena_Recursivo(0, n-1, A);
 }
 
-//************************************QUICKSORT MEDIANA******************************************//
+//************************************QUICKSORT SELEÇÃO******************************************
 
-//função auxiliar para realizar as trocas de elementos
-void QuickSort::swap(Registro A[], int i, int j){
-    Registro temp = A[i];
-    A[i] = A[j];
-    A[j] = temp;
-    metricas_QSM.Atribuicoes += 3;
+void QuickSort::Selecao(Registro A[], int inicio, int fim){
+    int i, j, maximo_index;
+ 
+    // One by one move boundary of
+    // unsorted subarray
+    for (i = inicio; i < fim ; i++)
+    {
+       
+        // Find the minimum element in
+        // unsorted array
+        maximo_index = i;
+        for (j = i+1; j < fim; j++)
+            if (A[j].key < A[maximo_index].key){
+                metricas.Comparacoes++;
+                maximo_index = j;
+            }
+ 
+        // Swap the found minimum element
+        // with the first element
+        if(maximo_index!=i){
+            metricas.Comparacoes++;
+            Troca(&A[maximo_index], &A[i]);
+        }
+    }
 }
 
-int QuickSort::Particao_Mediana(Registro A[], int inicio, int fim) {
-    //procura a mediana entre inicio, meio e fim
-    int meio = (inicio + fim) / 2;
-    Registro a = A[inicio];
-    Registro b = A[meio];
-    Registro c = A[fim];
-    int medianaIndice; //índice da mediana
-    //A sequência de if...else a seguir verifica qual é a mediana
-    metricas_QSM.Comparacoes++;
-    if (a < b) {
-        metricas_QSM.Comparacoes++;
-        if (b < c) {
-            //a < b && b < c
-            medianaIndice = meio;
-            metricas_QSM.Comparacoes++;
-        } else {
-            if (a < c) {
-                //a < c && c <= b
-                medianaIndice = fim;
-                metricas_QSM.Comparacoes++;
-            } else {
-                //c <= a && a < b
-                medianaIndice = inicio;
-                metricas_QSM.Comparacoes++;
+void QuickSort::Ordena_Selecao(Registro A[], int inicio, int fim, int m){
+    int diferenca = fim-inicio;
+    while(inicio < fim) {
+        metricas.Comparacoes++;
+        if (diferenca < m) {
+            metricas.Comparacoes++;
+            Selecao(A, inicio, fim);
+            break;
+        }
+        else {
+            int x = Particao_Selecao(A, inicio, fim);
+
+            if (x-inicio < fim-x) {
+                metricas.Comparacoes++;
+                Ordena_Selecao(A, inicio, x-1, m);
+                inicio = x+1;
+            }
+            else {
+                Ordena_Selecao(A, x+1, fim, m);
+                fim = x-1;
             }
         }
-    } else {
-        if (c < b) {
-            //c < b && b <= a
-            medianaIndice = meio;
-            metricas_QSM.Comparacoes++;
-        } else {
-            if (c < a) {
-                //b <= c && c < a
-                medianaIndice = fim;
-                metricas_QSM.Comparacoes++;
-            } else {
-                //b <= a && a <= c
-                medianaIndice = inicio;
-                metricas_QSM.Comparacoes++;
-            }
-        }
-    }
-    //coloca o elemento da mediana no fim para poder usar o Quicksort de Cormen
-    swap(A, medianaIndice, fim);
-
-    Registro pivo = A[fim];
-    int i = inicio - 1;
-    int j;
-    /*
-     * Este laço irá varrer os vetores da esquerda para direira
-     * procurando os elementos que são menores ou iguais ao pivô.
-     * Esses elementos são colocados na partição esquerda.         
-     */
-    for (j = inicio; j <= fim - 1; j++) {
-        if (A[j] <= pivo) {
-            metricas_QSM.Comparacoes++;
-            i = i + 1;
-            swap(A, i, j);
-        }
-    }
-
-    swap(A, i + 1, fim);
-    return i + 1; //retorna a posição do pivô
-}
-
-void QuickSort::Chama_QuickSort_Mediana(int inicio, Registro A[], int fim) {
-    if (inicio < fim) {
-        metricas_QSM.Comparacoes++;
-        //realiza a partição
-        int q = Particao_Mediana(A, inicio, fim);
-        //ordena a partição esquerda
-        Chama_QuickSort_Mediana(inicio, A, q - 1);
-        //ordena a partição direita
-        Chama_QuickSort_Mediana(q + 1, A, fim);
     }
 }
 
-//************************************QUICKSORT NAO RECURSIVO******************************************//
+int QuickSort::Particao_Selecao(Registro A[], int inicio, int fim){
+    //Descricao:: Realiza a partição do algoritmo QuickSort Seleção
 
-void QuickSort::swap_naoRec(Registro* a, Registro* b)
-{
-    Registro t = *a;
-    *a = *b;
-    *b = t;
-    metricas_QSNR.Atribuicoes+=3;
-}
-
-int QuickSort::partition_naoRec(Registro A[], int inicio, int fim)
-{
     Registro x = A[fim];
+    metricas.Atribuicoes++;
+    int i = inicio;
+
+    for (int j = inicio; j <= fim - 1; j++) {
+        if (A[j].key <= x.key) {
+            metricas.Comparacoes++;
+            Troca(&A[i], &A[j]);
+            i++;
+        }
+    }
+    Troca(&A[i], &A[fim]);
+    return i;
+}
+
+void QuickSort::QuickSort_Selecao(Registro A[], int n, int m){
+
+    //Descrição: as comparacoes e atribuicoes
+    metricas.Comparacoes=0;
+    metricas.Atribuicoes=0;
+
+    Ordena_Selecao(A, 0, n-1, m);
+}
+
+//************************************QUICKSORT MEDIANA******************************************
+
+void QuickSort::QuickSort_Mediana(Registro A[], int n, int k){
+
+    //Inicializa as comparacoes e atribuicoes
+    metricas.Comparacoes=0;
+    metricas.Atribuicoes=0;
+
+    Ordena_Mediana(A,0,n-1,k);
+}
+
+void QuickSort::Ordena_Mediana(Registro A[], int inicio, int fim, int k){
+
+}
+
+
+//************************************QUICKSORT NAO RECURSIVO************************************
+
+int QuickSort::Particao_naoRec(Registro A[], int inicio, int fim){
+    //Descricao: Particiona 
+    Registro x = A[fim];
+    metricas.Atribuicoes++;
     int indice_naoRec = (inicio - 1);
  
     for (int j = inicio ; j <= fim - 1; j++) {
-        metricas_QSNR.Comparacoes++;
-        if (A[j] <= x) {
+        if (A[j].key <= x.key) {
+            metricas.Comparacoes++;
             indice_naoRec++;
-            swap_naoRec(&A[indice_naoRec], &A[j]);
+            Troca(&A[indice_naoRec], &A[j]);
         }
     }
-    swap_naoRec(&A[indice_naoRec + 1], &A[fim]);
+    Troca(&A[indice_naoRec + 1], &A[fim]);
     return (indice_naoRec + 1);
 }
 
-void QuickSort::QuickSortNaoRec(Registro A[], int inicio, int fim){
+void QuickSort::Ordena_naoRec(Registro A[], int inicio, int fim){
     //Descricao: Implementacao do Algoritmo QuickSortNaoRecursivo
-    //Criando 
+
+    //Criando pilha dinamicamente
     int *pilha = new int[fim-inicio+1];
  
     //Inicializando o topo da pilha
@@ -179,66 +190,83 @@ void QuickSort::QuickSortNaoRec(Registro A[], int inicio, int fim){
     // push initial values of l and h to pilha
     topo_pilha++;
     pilha[topo_pilha] = inicio;
+    metricas.Atribuicoes++;
 
     topo_pilha++;
     pilha[topo_pilha] = fim;
+    metricas.Atribuicoes++;
  
     // Keep popping from pilha while is not empty
     while (topo_pilha >= 0) {
+        metricas.Comparacoes++;
         // Pop h and l
         fim = pilha[topo_pilha--];
         inicio = pilha[topo_pilha--];
+        metricas.Atribuicoes+=2;
  
         // Set pivot element at its correct position
         // in sorted array
-        int particao = partition_naoRec(A, inicio, fim);
+        int particao = Particao_naoRec(A, inicio, fim);
  
         // If there are elements on left side of pivot,
         // then push left side to pilha
         if (particao - 1 > inicio) {
+            metricas.Comparacoes++;
             topo_pilha++;
             pilha[topo_pilha] = inicio;
             topo_pilha++;
             pilha[topo_pilha] = particao - 1;
+            metricas.Atribuicoes+=2;
         }
  
         // If there are elements on right side of pivot,
         // then push right side to pilha
         if (particao + 1 < fim) {
-            topo_pilha++;
+            metricas.Comparacoes++;
             pilha[topo_pilha] = particao + 1;
-            topo_pilha++;
             pilha[topo_pilha] = fim;
+            metricas.Atribuicoes+=2;
         }
     }
     delete [] pilha;
 }
 
-void QuickSort::imprime_Metricas(int algoritmo, ofstream *saida, int n){
+void QuickSort::QuickSort_naoRec(Registro A[], int n){
+    //Descrição: Chamada do algoritmo QuickSort não Recursivo
+
+    //Inicializa as comparacoes e atribuicoes
+    metricas.Comparacoes=0;
+    metricas.Atribuicoes=0;
+
+    Ordena_naoRec(A,0,n-1);
+}
+
+void QuickSort::imprime_Metricas(int algoritmo, int semente, ofstream *saida, int n){
     //Descricao: Imprime as metricas de cada algoritmo
+
     if(algoritmo==1){
-        *saida << "QuickSort " << n << ":" << endl;
-        *saida << "Numero de comparacoes: " << metricas_QSR.Comparacoes << endl;
-        *saida << "Numero de atribuicoes: " << metricas_QSR.Atribuicoes << endl;
+        *saida << "QuickSort (" << n << ") - semente [" << semente << "]:" << endl;
+        *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+        *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
     }
     else if(algoritmo==2){
-        *saida << "QuickSort Mediana " << n << ":" << endl;
-        *saida << "Numero de comparacoes: " << metricas_QSM.Comparacoes << endl;
-        *saida << "Numero de atribuicoes: " << metricas_QSM.Atribuicoes << endl;
+        *saida << "QuickSort Mediana (" << n << ") - semente [" << semente << "]:" << endl;
+        *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+        *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
     }
     else if(algoritmo==3){
-        *saida << "QuickSort Selecao " << n << ":" << endl;
-        *saida << "Numero de comparacoes: " << metricas_QSS.Comparacoes << endl;
-        *saida << "Numero de atribuicoes: " << metricas_QSS.Atribuicoes << endl;
+        *saida << "QuickSort Selecao (" << n << ") - semente [" << semente << "]:" << endl;
+        *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+        *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
     }
     else if(algoritmo==4){
-        *saida << "QuickSort nao Recursivo " << n << ":" << endl;
-        *saida << "Numero de comparacoes: " << metricas_QSNR.Comparacoes << endl;
-        *saida << "Numero de atribuicoes: " << metricas_QSNR.Atribuicoes << endl;
+        *saida << "QuickSort nao Recursivo (" << n << ") - semente [" << semente << "]:" << endl;
+        *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+        *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
     }
     else if(algoritmo==5){
-        *saida << "QuickSort Empilha Inteligente " << n << ":" << endl;
-        *saida << "Numero de comparacoes: " << metricas_QSEI.Comparacoes << endl;
-        *saida << "Numero de atribuicoes: " << metricas_QSEI.Atribuicoes << endl;
+        *saida << "QuickSort Empilha Inteligente (" << n << ") - semente [" << semente << "]:" << endl;
+        *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+        *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
     }
 }

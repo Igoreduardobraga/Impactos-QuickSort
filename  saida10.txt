@@ -1,0 +1,10 @@
+QuickSort Selecao 1000:
+Numero de comparacoes: 0
+Numero de atribuicoes: 0
+Tempo de processamento: 0.04901
+
+QuickSort Selecao 1000:
+Numero de comparacoes: 0
+Numero de atribuicoes: 0
+Tempo de processamento: 0.048712
+

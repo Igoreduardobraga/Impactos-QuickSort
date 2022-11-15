@@ -2,6 +2,7 @@
 #include "memlog.h"
 #include "Registro.hpp"
 #include "msgassert.h"
+#include "GeradorAleatorio.hpp"
 //#include "QuickSort_Mediana.hpp"
 #include <fstream>
 #include <sys/resource.h>
@@ -12,10 +13,9 @@ using namespace std;
 
 string arquivo_entrada;
 string arquivo_saida;
-int semente;
+unsigned int algoritmo, semente, m, k;
 bool ativamem;
 char lognome[100];
-int algoritmo;
 
 void AnalisaComando(int argc, char ** argv){
     // Descrição: analisa a linha de comando a partir do arc e agrv
@@ -32,7 +32,7 @@ void AnalisaComando(int argc, char ** argv){
     // Inicializa lognome
     lognome[0] = 0;
 
-    while ((opcao = getopt(argc, argv, "p:li:o:v:s:")) != EOF){
+    while ((opcao = getopt(argc, argv, "p:li:o:v:s:m:k:")) != EOF){
        switch(opcao) {
             case 'p':
                 strcpy(lognome,optarg);
@@ -50,6 +50,12 @@ void AnalisaComando(int argc, char ** argv){
                 algoritmo = atoi(optarg);
             case 's':
                 semente = atoi(optarg);
+                break;
+            case 'm':
+                m = atoi(optarg);
+                break;
+            case 'k':
+                k = atoi(optarg);
                 break;
             default:
                 exit(1);
@@ -70,6 +76,8 @@ int main(int argc, char *argv[]) {
     int qntd_valores;
     int n;
     QuickSort quicksort;
+    QuickSort selecao;
+    GeradorAleatorio gerar;
 
     AnalisaComando(argc,argv);
 
@@ -86,13 +94,19 @@ int main(int argc, char *argv[]) {
 
     srand(semente);
 
+    cout << arquivo_entrada << endl;
+
+    try{
     ifstream entrada;
     entrada.open(arquivo_entrada, std::ios::in);
-    erroAssert(entrada.is_open(), "Não foi possivel abrir o arquivo de entrada");
-
+    if(!entrada.is_open()){
+        throw "Nao foi possivel abrir o arquivo de entrada";
+    }
     ofstream saida;
     saida.open(arquivo_saida, ios::out);
-    erroAssert(saida.is_open(), "Não foi possivel abrir o arquivo de entrada");
+    if(!saida.is_open()){
+        throw "Nao foi possivel abrir o arquivo de saida";
+    }
 
     entrada >> qntd_valores;
 
@@ -101,47 +115,45 @@ int main(int argc, char *argv[]) {
         entrada >> n;
         Registro *registro = new Registro[n];
         for(int k=0 ; k<n ; k++){
-            registro[k].key = rand();
-        }
-
-        for(int k=0 ; k<n ; k++){
-            cout << registro[k].key << " ";
-        }
-        cout << endl;
-
-        switch (algoritmo){
-            case 1:
-                quicksort.Chama_QuickSort_Recursivo(0, registro, n);
-                break;
-            case 2:
-                quicksort.Chama_QuickSort_Mediana(0, registro, n);
-                break;
-            case 3:
-                
-                break;
-            case 4:
-                quicksort.QuickSortNaoRec(registro, 0, n);
-                break;
-
-            default:
-                break;
+            registro[k].key = gerar.numAleatorio();
         }
 
         if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
             perror("getrusage falhou");
+
+        switch (algoritmo){
+            case 1:
+                quicksort.QuickSort_Recursivo(registro, n);
+                break;
+            case 2:
+                //quicksort.Chama_QuickSort_Mediana(0, registro, n);
+                break;
+            case 3:
+                selecao.QuickSort_Selecao(registro,n,m);
+                break;
+            case 4:
+                quicksort.QuickSort_naoRec(registro, n);
+                break;
+            case 5:
+                //quicksort.QuickSort_EmpilhaInteligente();
+            default:
+                break;
+        }
         
         utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
         stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
         total_time = utime+stime;
 
-        quicksort.imprime_Metricas(algoritmo, &saida, n);
+        quicksort.imprime_Metricas(algoritmo, semente, &saida, n);
         saida << "Tempo de processamento: " << total_time << endl  << endl;
 
         delete [] registro;
     }
-
     desativaMemLog();
     entrada.close();
     saida.close();
+    } catch(const char *e){
+        cout << "ERRO: " << e << endl;
+    }
     return 0;
 }

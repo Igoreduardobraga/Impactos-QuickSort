@@ -67,8 +67,8 @@ void MergeSort::mergeSort(int arr[], int l, int r) {
     }
 }
 
-void MergeSort::imprimirArray(int arr[], int size) {
-    for (int i = 0; i < size; i++)
-    cout << arr[i] << " ";
-    cout << endl;
+void MergeSort::imprimir_metricas(ofstream *saida, int n) {
+    *saida << "MergeSort " << n << ":" << endl;
+    *saida << "Numero de comparacoes: " << metricas_MergeSort.Comparacoes << endl;
+    *saida << "Numero de atribuicoes: " << metricas_MergeSort.Atribuicoes << endl;
 }

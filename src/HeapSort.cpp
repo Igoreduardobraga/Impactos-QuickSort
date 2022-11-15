@@ -38,3 +38,8 @@ void HeapSort::Refaz(int Esq, int Dir, Registro *A){
     metricas_HeapSort.Atribuicoes++;
 }
 
+void HeapSort::imprimir_metricas(ofstream *saida, int n) {
+    *saida << "MergeSort " << n << ":" << endl;
+    *saida << "Numero de comparacoes: " << metricas_HeapSort.Comparacoes << endl;
+    *saida << "Numero de atribuicoes: " << metricas_HeapSort.Atribuicoes << endl;
+}

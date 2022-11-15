@@ -10,33 +10,35 @@ using namespace std;
 class QuickSort{
     private:
         //Metricas do algoritmo QuickSort recursivo
-        Metricas metricas_QSR;
-        //Metricas do algoritmo QuickSort mediana
-        Metricas metricas_QSM;
-        //Metricas do algoritmo QuickSort selecao
-        Metricas metricas_QSS;
-        //Metricas do algoritmo QuickSort nao recursivo
-        Metricas metricas_QSNR;
-        //Metricas do algoritmo QuickSort empilha inteligente
-        Metricas metricas_QSEI;
+        Metricas metricas;
 
     public:
         QuickSort();
-        //QuickSort(int n);
 
-        void Chama_QuickSort_Recursivo(int inicio, Registro *A, int n);
+        //Metodos QuickSort Recursivo
+        void QuickSort_Recursivo(Registro *A, int n);
         void Particao(int Esq, int Dir, int *i, int *j, Registro *A);
         void Ordena_Recursivo(int Esq, int Dir, Registro *A);
 
-        void swap(Registro A[], int i, int j);
-        int Particao_Mediana(Registro A[], int inicio, int fim);
-        void Chama_QuickSort_Mediana(int inicio, Registro A[], int fim);
+        //Metodos QuickSort Seleção
+        void Selecao(Registro A[], int inicio, int fim);
+        void QuickSort_Selecao(Registro A[], int n, int m);
+        void Ordena_Selecao(Registro A[], int inicio, int fim, int m);
+        int Particao_Selecao(Registro A[], int inicio, int fim);
 
-        void swap_naoRec(Registro* a, Registro* b);
-        int partition_naoRec(Registro A[], int inicio, int fim);
-        void QuickSortNaoRec(Registro *A, int inicio, int fim);
+        //Metodos QuickSort Mediana
+        void QuickSort_Mediana(Registro A[], int fim, int k);
+        void Ordena_Mediana(Registro A[], int inicio, int fim, int k);
+        
+        //Metodos QuickSort não recursivo
+        void Troca(Registro* a, Registro* b);
+        int Particao_naoRec(Registro A[], int inicio, int fim);
+        void QuickSort_naoRec(Registro A[], int n);
+        void Ordena_naoRec(Registro A[], int inicio, int fim);
 
-        void imprime_Metricas(int algoritmo, ofstream *saida, int i);
+        //Metodos QuickSort Empilha Inteligente
+
+        void imprime_Metricas(int algoritmo, int semente, ofstream *saida, int i);
 };
 
 #endif
