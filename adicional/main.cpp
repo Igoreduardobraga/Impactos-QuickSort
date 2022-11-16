@@ -1,8 +1,9 @@
 #include <iostream>
+#include <sys/resource.h>
 using namespace std;
 
 void Troca(int* a, int* b){
-    //Descricao:: Realiza a troca de posição
+    //Descricao: Realiza a troca de posição
 
     int t = *a;
     *a = *b;
@@ -11,75 +12,63 @@ void Troca(int* a, int* b){
 
 //************************************QUICKSORT RECURSIVO******************************************//
 
-int Particao_naoRec(int A[], int inicio, int fim){
-    //Descricao: Particiona 
+void Selecao(int A[], int inicio, int fim){
+
+    for (int step = 0; step < fim - 1; step++) {
+        int min_idx = step;
+        for (int i = step + 1; i < fim; i++) {
+            if (A[i] < A[min_idx])
+                min_idx = i;
+    }
+
+    // put min at the correct position
+    Troca(&A[min_idx], &A[step]);
+    }
+}
+
+int Particao_Selecao(int A[], int inicio, int fim){
+    //Descricao: Realiza a partição do algoritmo QuickSort Seleção
+
     int x = A[fim];
-    
-    int indice_naoRec = (inicio - 1);
- 
-    for (int j = inicio ; j <= fim - 1; j++) {
+    int i = inicio;
+
+    for (int j = inicio; j < fim ; j++) {
         if (A[j] <= x) {
-            
-            indice_naoRec++;
-            Troca(&A[indice_naoRec], &A[j]);
-        }
-    }
-    Troca(&A[indice_naoRec + 1], &A[fim]);
-    return (indice_naoRec + 1);
-}
-
-void Ordena_naoRec(int A[], int inicio, int fim){
-    //Descricao: Implementacao do Algoritmo QuickSortNaoRecursivo
-
-    //Criando pilha dinamicamente
-    int *pilha = new int[fim-inicio+1];
- 
-    //Inicializando o topo da pilha
-    int topo_pilha = -1;
- 
-    // push initial values of l and h to pilha
-    pilha[++topo_pilha] = inicio;
-    
-
-    pilha[++topo_pilha] = fim;
-    
- 
-    // Keep popping from pilha while is not empty
-    while (topo_pilha >= 0) {
         
-        // Pop h and l
-        fim = pilha[topo_pilha--];
-        inicio = pilha[topo_pilha--];
- 
-        // Set pivot element at its correct position
-        // in sorted array
-        int particao = Particao_naoRec(A, inicio, fim);
- 
-        // If there are elements on left side of pivot,
-        // then push left side to pilha
-        if (particao - 1 > inicio) {
-            
-            pilha[++topo_pilha] = inicio;
-            pilha[++topo_pilha] = particao - 1;
-        }
- 
-        // If there are elements on right side of pivot,
-        // then push right side to pilha
-        if (particao + 1 < fim) {
-            
-            pilha[++topo_pilha] = particao + 1;
-            pilha[++topo_pilha] = fim;
+            Troca(&A[i], &A[j]);
+            i++;
         }
     }
-    delete [] pilha;
+
+    Troca(&A[i], &A[fim]);
+    return i;
 }
 
-void QuickSort_naoRec(int A[], int n){
-    //Descrição: Chamada do algoritmo QuickSort não Recursivo
+void Ordena_Selecao(int A[], int inicio, int fim, int m){
+    int diferenca = fim-inicio;
+    while(inicio < fim) {
+        if (diferenca < m) {
+            Selecao(A, inicio, fim);
+            break;
+        }
+        else {
+            int x = Particao_Selecao(A, inicio, fim);
 
-    //Inicializa as comparacoes e atribuicoes
+            if (x-inicio < fim-x) {
+                Ordena_Selecao(A, inicio, x-1, m);
+                inicio = x+1;
+            }
+            else {
+                Ordena_Selecao(A, x+1, fim, m);
+                fim = x-1;
+            }
+        }
+    }
+}
 
-    Ordena_naoRec(A,0,n-1);
+void QuickSort_Selecao(int A[], int n, int m){
+
+    Ordena_Selecao(A, 0, n-1, m);
 }
 
 void printArray(int arr[], int size)
@@ -91,7 +80,14 @@ void printArray(int arr[], int size)
 }
 
 int main(){
+
+    struct rusage resources;
+    int rc;
+    double utime, stime, total_time;
     int arr[20];
+
+    if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
+            perror("getrusage falhou");
 
     for(int i=0; i<20 ; i++){
         arr[i] = rand()%100;
@@ -99,8 +95,16 @@ int main(){
     }
     cout << endl;
 
-    QuickSort_naoRec(arr, 20);
+    QuickSort_Selecao(arr, 20, 10);
+
+    utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
+    stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
+    total_time = utime+stime;
+
     cout << "Sorted array: \n";
     printArray(arr, 20);
+    cout << "Tempo de processamento : " << total_time << endl;
+
+    
     return 0;
 }
