@@ -18,7 +18,7 @@ int GeradorAleatorio::numAleatorio(){
 
 double GeradorAleatorio::numRealAleatorio(){
     float min = 0;
-    float max =  1000;
+    float max = 1000;
     float f = min + rand() * (max - min) / RAND_MAX;
     return f;
 }

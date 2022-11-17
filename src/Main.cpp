@@ -76,7 +76,6 @@ int main(int argc, char *argv[]) {
     int qntd_valores;
     int n;
     QuickSort quicksort;
-    QuickSort selecao;
     GeradorAleatorio gerar;
 
     AnalisaComando(argc,argv);
@@ -126,16 +125,16 @@ int main(int argc, char *argv[]) {
                 quicksort.QuickSort_Recursivo(registro, n);
                 break;
             case 2:
-                //quicksort.Chama_QuickSort_Mediana(0, registro, n);
+                quicksort.QuickSort_Mediana(registro, n, k);
                 break;
             case 3:
-                selecao.QuickSort_Selecao(registro,n,m);
+                quicksort.QuickSort_Selecao(registro,n,m);
                 break;
             case 4:
                 quicksort.QuickSort_naoRec(registro, n);
                 break;
             case 5:
-                //quicksort.QuickSort_EmpilhaInteligente();
+                //quicksort.QuickSort_EmpilhaInteligente(registro,n);
             default:
                 break;
         }

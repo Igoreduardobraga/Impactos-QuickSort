@@ -108,3 +108,61 @@ int main(){
     
     return 0;
 }
+
+
+// int *posicoes_mediana = new int[qnt_elementos_mediana];
+//         posicoes_mediana[0] = inicio+rand()%fim;
+//         for(int i=1 ; i<qnt_elementos_mediana ; i++){
+//             posicoes_mediana[i] = inicio+rand()%fim;
+//         }
+
+//         for (int step = 0; step <qnt_elementos_mediana  ; step++) {
+//             int min_idx = step;
+//         for (int i = step + 1; i < qnt_elementos_mediana; i++) {
+//             if (posicoes_mediana[i] < posicoes_mediana[min_idx])
+//                 min_idx = i;
+//         }
+
+//         int temp = posicoes_mediana[min_idx];
+//         posicoes_mediana[min_idx] = posicoes_mediana[step];
+//         posicoes_mediana[step] = temp;
+//         }
+        
+//     int aux = qnt_elementos_mediana/2.0;
+//     int mediana = posicoes_mediana[aux];
+//     delete [] posicoes_mediana;
+//     return A[mediana];
+
+// unsigned int quantidadePivosSeraoEscolhidos = 0;
+//             if(quantidadePossiveisPivos >= (poiscaoFinal - posicaoInicial + 1)) {
+//                 return vetor[posicaoInicial];
+//             }
+//             else {
+//                 quantidadePivosSeraoEscolhidos = quantidadePossiveisPivos;
+//             }
+//             unsigned int* posicoesEscolhidas = new unsigned int[quantidadePivosSeraoEscolhidos];
+
+//             posicoesEscolhidas[0] = Utils::gerarNumeroInteiroAleatorioEmUmaFaixa(posicaoInicial, poiscaoFinal);
+//             for(unsigned int i = 1; i < quantidadePivosSeraoEscolhidos; i++) {
+//                 unsigned int possivelPosicao = Utils::gerarNumeroInteiroAleatorioEmUmaFaixa(posicaoInicial, poiscaoFinal);
+
+//                 for(unsigned int j = 0; j < i; j++) {
+//                     if(possivelPosicao == posicoesEscolhidas[j]) {
+//                         i--;
+//                         break;
+//                     }
+                    
+//                     if(j == i - 1) {
+//                         posicoesEscolhidas[i] = possivelPosicao;
+//                         break;
+//                     }
+//                 }
+//             }
+
+//             Selecao::ordenarCrescente(posicoesEscolhidas, quantidadePivosSeraoEscolhidos);
+
+//             unsigned int indexMediana = std::floor(quantidadePivosSeraoEscolhidos / 2.0); 
+//             unsigned int indexPivoEscolhido = posicoesEscolhidas[indexMediana];
+
+//             delete[] posicoesEscolhidas;
+//             return vetor[indexPivoEscolhido];

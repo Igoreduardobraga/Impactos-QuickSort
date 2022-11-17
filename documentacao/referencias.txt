@@ -1,0 +1,4 @@
+https://www.geeksforgeeks.org/quickselect-algorithm/
+https://www.geeksforgeeks.org/selection-sort/
+https://www.geeksforgeeks.org/iterative-quick-sort/
+https://brilliant.org/wiki/median-finding-algorithm/#:~:text=The%20median%2Dof%2Dmedians%20algorithm%20is%20a%20deterministic%20linear%2D,the%20median%20of%20that%20list.

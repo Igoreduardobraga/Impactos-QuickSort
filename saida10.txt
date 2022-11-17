@@ -1,35 +1,20 @@
 QuickSort (1000) - semente [10]:
-Numero de comparacoes: 14879
-Numero de atribuicoes: 7752
-Tempo de processamento: 0.019859
+Numero de comparacoes: 12466
+Numero de atribuicoes: 7842
+Tempo de processamento: 0.056927
 
 QuickSort (5000) - semente [10]:
-Numero de comparacoes: 87641
-Numero de atribuicoes: 46638
-Tempo de processamento: 0.099629
+Numero de comparacoes: 83748
+Numero de atribuicoes: 45927
+Tempo de processamento: 0.3006
 
 QuickSort (10000) - semente [10]:
-Numero de comparacoes: 175165
-Numero de atribuicoes: 101832
-Tempo de processamento: 0.291314
+Numero de comparacoes: 176202
+Numero de atribuicoes: 101019
+Tempo de processamento: 0.895108
 
 QuickSort (50000) - semente [10]:
-Numero de comparacoes: 1049453
-Numero de atribuicoes: 586992
-Tempo de processamento: 0.96229
-
-QuickSort (100000) - semente [10]:
-Numero de comparacoes: 2315615
-Numero de atribuicoes: 1232913
-Tempo de processamento: 3.53941
-
-QuickSort (500000) - semente [10]:
-Numero de comparacoes: 12870352
-Numero de atribuicoes: 7017561
-Tempo de processamento: 11.2661
-
-QuickSort (1000000) - semente [10]:
-Numero de comparacoes: 28140758
-Numero de atribuicoes: 14624922
-Tempo de processamento: 32.1845
+Numero de comparacoes: 1021459
+Numero de atribuicoes: 586683
+Tempo de processamento: 3.43342
 

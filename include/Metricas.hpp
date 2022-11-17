@@ -3,9 +3,9 @@
 
 class Metricas{
     public:
-        unsigned int Comparacoes = 0;
-        unsigned int Atribuicoes = 0;
-        Metricas() { };
+        int Comparacoes = 0;
+        int Atribuicoes = 0;
+        Metricas() {}
         void Imprimir();
 };
 
