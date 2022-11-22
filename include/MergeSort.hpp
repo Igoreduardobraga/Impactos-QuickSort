@@ -3,18 +3,19 @@
 
 using namespace std;
 #include "Metricas.hpp"
+#include "Registro.hpp"
 #include <iostream>
 #include <fstream>
 
 class MergeSort{
     private:
-        Metricas metricas_MergeSort;
+        Metricas metricas;
 
     public:
-        MergeSort();
-        void merge(int arr[], int p, int q, int r);
-        void mergeSort(int arr[], int l, int r);
-        void imprimir_metricas(ofstream *saida, int n); 
+        MergeSort(){}
+        void merge(Registro A[], int const esq, int const mid, int const right);
+        void mergeSort(Registro A[], int const begin, int const end);
+        void imprimir_metricas(ofstream *saida, int semente, int n); 
 };
 
 #endif

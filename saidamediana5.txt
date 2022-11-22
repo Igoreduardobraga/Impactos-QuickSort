@@ -1,0 +1,35 @@
+QuickSort Mediana (1000) - semente [8]:
+Numero de comparacoes: 13809
+Numero de atribuicoes: 8743
+Tempo de processamento: 0.038125
+
+QuickSort Mediana (5000) - semente [8]:
+Numero de comparacoes: 82743
+Numero de atribuicoes: 51624
+Tempo de processamento: 0.258821
+
+QuickSort Mediana (10000) - semente [8]:
+Numero de comparacoes: 177512
+Numero de atribuicoes: 110268
+Tempo de processamento: 0.869231
+
+QuickSort Mediana (50000) - semente [8]:
+Numero de comparacoes: 1068884
+Numero de atribuicoes: 634329
+Tempo de processamento: 3.03979
+
+QuickSort Mediana (100000) - semente [8]:
+Numero de comparacoes: 2391936
+Numero de atribuicoes: 1332024
+Tempo de processamento: 9.30457
+
+QuickSort Mediana (500000) - semente [8]:
+Numero de comparacoes: 13622690
+Numero de atribuicoes: 7419371
+Tempo de processamento: 30.7689
+
+QuickSort Mediana (1000000) - semente [8]:
+Numero de comparacoes: 26937183
+Numero de atribuicoes: 15728287
+Tempo de processamento: 90.9018
+

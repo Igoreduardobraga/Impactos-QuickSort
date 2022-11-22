@@ -2,6 +2,7 @@
 #define QUICKSORT_H
 #include "Metricas.hpp"
 #include "Registro.hpp"
+#include "memlog.h"
 #include "Item.hpp"
 #include "Pilha.hpp"
 #include <stdio.h>
@@ -32,7 +33,7 @@ class QuickSort{
         void QuickSort_Mediana(Registro A[], int fim, int k);
         void Ordena_Mediana(Registro A[], int Esq, int Dir, int k);
         void Particao_Mediana(Registro A[], int Esq, int Dir, int *i, int *j, int k);
-        Registro Mediana(Registro A[], int Esq, int Dir, int k);
+        Registro Mediana(Registro A[], int Esq, int Dir, int i, int j, int k);
         
         //Metodos QuickSort não recursivo
         void Troca(Registro* a, Registro* b);

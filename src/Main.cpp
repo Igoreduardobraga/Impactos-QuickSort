@@ -3,7 +3,8 @@
 #include "Registro.hpp"
 #include "msgassert.h"
 #include "GeradorAleatorio.hpp"
-//#include "QuickSort_Mediana.hpp"
+#include "HeapSort.hpp"
+#include "MergeSort.hpp"
 #include <fstream>
 #include <sys/resource.h>
 #include <iostream>
@@ -77,6 +78,8 @@ int main(int argc, char *argv[]) {
     int n;
     QuickSort quicksort;
     GeradorAleatorio gerar;
+    HeapSort heapsort;
+    MergeSort mergesort;
 
     AnalisaComando(argc,argv);
 
@@ -93,8 +96,6 @@ int main(int argc, char *argv[]) {
 
     srand(semente);
 
-    cout << arquivo_entrada << endl;
-
     try{
     ifstream entrada;
     entrada.open(arquivo_entrada, std::ios::in);
@@ -102,7 +103,7 @@ int main(int argc, char *argv[]) {
         throw "Nao foi possivel abrir o arquivo de entrada";
     }
     ofstream saida;
-    saida.open(arquivo_saida, ios::out);
+    saida.open(arquivo_saida, ios::app);
     if(!saida.is_open()){
         throw "Nao foi possivel abrir o arquivo de saida";
     }
@@ -134,7 +135,16 @@ int main(int argc, char *argv[]) {
                 quicksort.QuickSort_naoRec(registro, n);
                 break;
             case 5:
-                //quicksort.QuickSort_EmpilhaInteligente(registro,n);
+                quicksort.QuickSort_EmpilhaInteligente(registro,n);
+                break;
+            case 6:
+                heapsort.heapSort(registro,n);
+                heapsort.imprimir_metricas(&saida, semente, n);
+                break;
+            case 7:
+                mergesort.mergeSort(registro,0,n-1);
+                mergesort.imprimir_metricas(&saida, semente, n);
+                break;
             default:
                 break;
         }

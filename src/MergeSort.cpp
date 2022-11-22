@@ -1,74 +1,77 @@
 #include "MergeSort.hpp"
 
-void MergeSort::merge(int arr[], int p, int q, int r) {
-  
-    int n1 = q - p + 1;
-    int n2 = r - q;
+void MergeSort::merge(Registro A[], int const esq, int const x, int const Dir){
+    //Descricao: realiza a ordenacao do vetor pelo algoritmo mergesort
 
-    int L[n1], M[n2];
-
-    for (int i = 0; i < n1; i++){
-        metricas_MergeSort.Comparacoes++;
-        L[i] = arr[p + i];
-        metricas_MergeSort.Atribuicoes++;
+    int subVetorUm = x - esq + 1;
+    int subVetorDois = Dir - x;
+    metricas.Atribuicoes+=2;
+ 
+    Registro *esqVetor = new Registro[subVetorUm], *DirVetor = new Registro[subVetorDois];
+ 
+    for (int i = 0; i < subVetorUm; i++){
+        esqVetor[i] = A[esq + i];
+        metricas.Atribuicoes++;
     }
-
-    for (int j = 0; j < n2; j++){
-        metricas_MergeSort.Comparacoes++;
-        M[j] = arr[q + 1 + j];
-        metricas_MergeSort.Atribuicoes++;
+    for (int j = 0; j < subVetorDois; j++){
+        DirVetor[j] = A[x + 1 + j];
+        metricas.Atribuicoes++;
     }
+ 
+    int index_subVetorUm = 0, index_subVetorDois = 0; 
+    int indexOfMergedVetor = esq; 
 
-    int i, j, k;
-    i = 0;
-    j = 0;
-    k = p;
-
-    while (i < n1 && j < n2) {
-        metricas_MergeSort.Comparacoes++;
-    if (L[i] <= M[j]) {
-        metricas_MergeSort.Comparacoes++;
-        arr[k] = L[i];
-        i++;
-    } else {
-        arr[k] = M[j];
-        metricas_MergeSort.Atribuicoes++;
-        j++;
+    while (index_subVetorUm < subVetorUm && index_subVetorDois < subVetorDois) {
+        if (esqVetor[index_subVetorUm].key <= DirVetor[index_subVetorDois].key) {
+            metricas.Comparacoes++;
+            A[indexOfMergedVetor] = esqVetor[index_subVetorUm];
+            metricas.Atribuicoes++;
+            index_subVetorUm++;
+        }
+        else {
+            A[indexOfMergedVetor] = DirVetor[index_subVetorDois];
+            index_subVetorDois++;
+        }
+        indexOfMergedVetor++;
     }
-    k++;
+    
+    while (index_subVetorUm < subVetorUm) {
+        A[indexOfMergedVetor] = esqVetor[index_subVetorUm];
+        metricas.Atribuicoes++;
+        index_subVetorUm++;
+        indexOfMergedVetor++;
     }
-
-    while (i < n1) {
-        metricas_MergeSort.Comparacoes++;
-        arr[k] = L[i];
-        metricas_MergeSort.Atribuicoes++;
-        i++;
-        k++;
+    
+    while (index_subVetorDois < subVetorDois) {
+        A[indexOfMergedVetor] = DirVetor[index_subVetorDois];
+        metricas.Atribuicoes++;
+        index_subVetorDois++;
+        indexOfMergedVetor++;
     }
-
-    while (j < n2) {
-        metricas_MergeSort.Comparacoes++;
-        arr[k] = M[j];
-        metricas_MergeSort.Atribuicoes++;
-        j++;
-        k++;
-    }
+    delete[] esqVetor;
+    delete[] DirVetor;
 }
 
-void MergeSort::mergeSort(int arr[], int l, int r) {
-    if (l < r) {
-        metricas_MergeSort.Comparacoes++;
-        int m = l + (r - l) / 2;
+void MergeSort::mergeSort(Registro A[], int const inicio, int const fim){
+    //Descricao: Chamada do algoritmo Mergesort
 
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
+    //Inicializando as metricas
+    metricas.Atribuicoes=0;
+    metricas.Comparacoes=0;
 
-        merge(arr, l, m, r);
-    }
+    if (inicio >= fim)
+        return;
+ 
+    auto x = inicio + (fim - inicio) / 2;
+    mergeSort(A, inicio, x);
+    mergeSort(A, x + 1, fim);
+    merge(A, inicio, x, fim);
 }
 
-void MergeSort::imprimir_metricas(ofstream *saida, int n) {
-    *saida << "MergeSort " << n << ":" << endl;
-    *saida << "Numero de comparacoes: " << metricas_MergeSort.Comparacoes << endl;
-    *saida << "Numero de atribuicoes: " << metricas_MergeSort.Atribuicoes << endl;
+void MergeSort::imprimir_metricas(ofstream *saida, int semente, int n) {
+    //Descricao: Imprime as metricas do Mergesort
+
+    *saida << "MergeSort (" << n << ") - semente [" << semente << "]:" << endl;
+    *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+    *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
 }

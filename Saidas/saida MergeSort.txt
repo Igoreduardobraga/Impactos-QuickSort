@@ -1,0 +1,55 @@
+MergeSort (1000) - semente [8]:
+Numero de comparacoes: 982
+Numero de atribuicoes: 3018
+Tempo de processamento: 0.066747
+
+MergeSort (5000) - semente [8]:
+Numero de comparacoes: 4987
+Numero de atribuicoes: 15022
+Tempo de processamento: 0.531358
+
+MergeSort (10000) - semente [8]:
+Numero de comparacoes: 9992
+Numero de atribuicoes: 30031
+Tempo de processamento: 2.84661
+
+MergeSort (50000) - semente [8]:
+Numero de comparacoes: 49989
+Numero de atribuicoes: 150035
+Tempo de processamento: 8.76634
+
+MergeSort (100000) - semente [8]:
+Numero de comparacoes: 99985
+Numero de atribuicoes: 300031
+Tempo de processamento: 36.3437
+
+MergeSort (500000) - semente [8]:
+Numero de comparacoes: 499983
+Numero de atribuicoes: 1500041
+Tempo de processamento: 103.597
+
+MergeSort (1000000) - semente [8]:
+Numero de comparacoes: 999978
+Numero de atribuicoes: 3000038
+Tempo de processamento: 431.862
+
+MergeSort (1000) - semente [10]:
+Numero de comparacoes: 989
+Numero de atribuicoes: 3015
+Tempo de processamento: 0.066566
+
+MergeSort (5000) - semente [10]:
+Numero de comparacoes: 4988
+Numero de atribuicoes: 15024
+Tempo de processamento: 0.533862
+
+MergeSort (10000) - semente [10]:
+Numero de comparacoes: 9981
+Numero de atribuicoes: 30025
+Tempo de processamento: 2.85431
+
+MergeSort (50000) - semente [10]:
+Numero de comparacoes: 49980
+Numero de atribuicoes: 150029
+Tempo de processamento: 9.1005
+

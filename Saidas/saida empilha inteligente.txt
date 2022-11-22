@@ -1,0 +1,175 @@
+QuickSort Empilha Inteligente (1000) - semente [10]:
+Numero de comparacoes: 12466
+Numero de atribuicoes: 7842
+Tempo de processamento: 0.036762
+
+QuickSort Empilha Inteligente (5000) - semente [10]:
+Numero de comparacoes: 83748
+Numero de atribuicoes: 45927
+Tempo de processamento: 0.254809
+
+QuickSort Empilha Inteligente (10000) - semente [10]:
+Numero de comparacoes: 176202
+Numero de atribuicoes: 101019
+Tempo de processamento: 0.871785
+
+QuickSort Empilha Inteligente (50000) - semente [10]:
+Numero de comparacoes: 1021459
+Numero de atribuicoes: 586683
+Tempo de processamento: 3.04967
+
+QuickSort Empilha Inteligente (100000) - semente [10]:
+Numero de comparacoes: 2170551
+Numero de atribuicoes: 1244709
+Tempo de processamento: 9.05633
+
+QuickSort Empilha Inteligente (500000) - semente [10]:
+Numero de comparacoes: 12557481
+Numero de atribuicoes: 6999156
+Tempo de processamento: 30.7085
+
+QuickSort Empilha Inteligente (1000000) - semente [10]:
+Numero de comparacoes: 27484974
+Numero de atribuicoes: 14606250
+Tempo de processamento: 92.9344
+
+QuickSort Empilha Inteligente (1000) - semente [20]:
+Numero de comparacoes: 14152
+Numero de atribuicoes: 7638
+Tempo de processamento: 0.070157
+
+QuickSort Empilha Inteligente (5000) - semente [20]:
+Numero de comparacoes: 82034
+Numero de atribuicoes: 46662
+Tempo de processamento: 0.288043
+
+QuickSort Empilha Inteligente (10000) - semente [20]:
+Numero de comparacoes: 174403
+Numero de atribuicoes: 100863
+Tempo de processamento: 0.886854
+
+QuickSort Empilha Inteligente (50000) - semente [20]:
+Numero de comparacoes: 1096777
+Numero de atribuicoes: 576096
+Tempo de processamento: 3.08031
+
+QuickSort Empilha Inteligente (100000) - semente [20]:
+Numero de comparacoes: 2279711
+Numero de atribuicoes: 1234719
+Tempo de processamento: 9.06607
+
+QuickSort Empilha Inteligente (500000) - semente [20]:
+Numero de comparacoes: 12357437
+Numero de atribuicoes: 7039809
+Tempo de processamento: 30.1422
+
+QuickSort Empilha Inteligente (1000000) - semente [20]:
+Numero de comparacoes: 27588751
+Numero de atribuicoes: 14554893
+Tempo de processamento: 90.6189
+
+QuickSort Empilha Inteligente (1000) - semente [30]:
+Numero de comparacoes: 13508
+Numero de atribuicoes: 7701
+Tempo de processamento: 0.065289
+
+QuickSort Empilha Inteligente (5000) - semente [30]:
+Numero de comparacoes: 78069
+Numero de atribuicoes: 47190
+Tempo de processamento: 0.289114
+
+QuickSort Empilha Inteligente (10000) - semente [30]:
+Numero de comparacoes: 178092
+Numero de atribuicoes: 100482
+Tempo de processamento: 0.893436
+
+QuickSort Empilha Inteligente (50000) - semente [30]:
+Numero de comparacoes: 1076624
+Numero de atribuicoes: 581109
+Tempo de processamento: 3.09327
+
+QuickSort Empilha Inteligente (100000) - semente [30]:
+Numero de comparacoes: 2183105
+Numero de atribuicoes: 1240275
+Tempo de processamento: 9.16699
+
+QuickSort Empilha Inteligente (500000) - semente [30]:
+Numero de comparacoes: 13173559
+Numero de atribuicoes: 6946968
+Tempo de processamento: 30.4378
+
+QuickSort Empilha Inteligente (1000000) - semente [30]:
+Numero de comparacoes: 27182195
+Numero de atribuicoes: 14598156
+Tempo de processamento: 90.5172
+
+QuickSort Empilha Inteligente (1000) - semente [40]:
+Numero de comparacoes: 12867
+Numero de atribuicoes: 7761
+Tempo de processamento: 0.064489
+
+QuickSort Empilha Inteligente (5000) - semente [40]:
+Numero de comparacoes: 79501
+Numero de atribuicoes: 47103
+Tempo de processamento: 0.283785
+
+QuickSort Empilha Inteligente (10000) - semente [40]:
+Numero de comparacoes: 178765
+Numero de atribuicoes: 99606
+Tempo de processamento: 0.882427
+
+QuickSort Empilha Inteligente (50000) - semente [40]:
+Numero de comparacoes: 1096078
+Numero de atribuicoes: 575175
+Tempo de processamento: 3.05603
+
+QuickSort Empilha Inteligente (100000) - semente [40]:
+Numero de comparacoes: 2235843
+Numero de atribuicoes: 1234908
+Tempo de processamento: 8.9934
+
+QuickSort Empilha Inteligente (500000) - semente [40]:
+Numero de comparacoes: 12668765
+Numero de atribuicoes: 6994248
+Tempo de processamento: 30.037
+
+QuickSort Empilha Inteligente (1000000) - semente [40]:
+Numero de comparacoes: 27431938
+Numero de atribuicoes: 14544024
+Tempo de processamento: 89.4997
+
+QuickSort Empilha Inteligente (1000) - semente [50]:
+Numero de comparacoes: 12642
+Numero de atribuicoes: 7764
+Tempo de processamento: 0.060938
+
+QuickSort Empilha Inteligente (5000) - semente [50]:
+Numero de comparacoes: 84044
+Numero de atribuicoes: 46824
+Tempo de processamento: 0.278593
+
+QuickSort Empilha Inteligente (10000) - semente [50]:
+Numero de comparacoes: 171224
+Numero de atribuicoes: 101082
+Tempo de processamento: 0.883127
+
+QuickSort Empilha Inteligente (50000) - semente [50]:
+Numero de comparacoes: 1081786
+Numero de atribuicoes: 576732
+Tempo de processamento: 3.11903
+
+QuickSort Empilha Inteligente (100000) - semente [50]:
+Numero de comparacoes: 2224746
+Numero de atribuicoes: 1233165
+Tempo de processamento: 9.27047
+
+QuickSort Empilha Inteligente (500000) - semente [50]:
+Numero de comparacoes: 12517021
+Numero de atribuicoes: 7005201
+Tempo de processamento: 30.4318
+
+QuickSort Empilha Inteligente (1000000) - semente [50]:
+Numero de comparacoes: 25954888
+Numero de atribuicoes: 14771901
+Tempo de processamento: 90.6661
+

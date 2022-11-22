@@ -1,0 +1,175 @@
+QuickSort nao Recursivo (1000) - semente [10]:
+Numero de comparacoes: 6467
+Numero de atribuicoes: 20722
+Tempo de processamento: 0.035575
+
+QuickSort nao Recursivo (5000) - semente [10]:
+Numero de comparacoes: 45243
+Numero de atribuicoes: 142428
+Tempo de processamento: 0.199808
+
+QuickSort nao Recursivo (10000) - semente [10]:
+Numero de comparacoes: 88861
+Numero de atribuicoes: 279914
+Tempo de processamento: 0.553748
+
+QuickSort nao Recursivo (50000) - semente [10]:
+Numero de comparacoes: 547665
+Numero de atribuicoes: 1709644
+Tempo de processamento: 2.28838
+
+QuickSort nao Recursivo (100000) - semente [10]:
+Numero de comparacoes: 1459978
+Numero de atribuicoes: 4513185
+Tempo de processamento: 6.1885
+
+QuickSort nao Recursivo (500000) - semente [10]:
+Numero de comparacoes: 6173124
+Numero de atribuicoes: 19185645
+Tempo de processamento: 23.263
+
+QuickSort nao Recursivo (1000000) - semente [10]:
+Numero de comparacoes: 14203206
+Numero de atribuicoes: 43943135
+Tempo de processamento: 60.0051
+
+QuickSort nao Recursivo (1000) - semente [20]:
+Numero de comparacoes: 6791
+Numero de atribuicoes: 21706
+Tempo de processamento: 0.032795
+
+QuickSort nao Recursivo (5000) - semente [20]:
+Numero de comparacoes: 39891
+Numero de atribuicoes: 126340
+Tempo de processamento: 0.202328
+
+QuickSort nao Recursivo (10000) - semente [20]:
+Numero de comparacoes: 101280
+Numero de atribuicoes: 317145
+Tempo de processamento: 0.554651
+
+QuickSort nao Recursivo (50000) - semente [20]:
+Numero de comparacoes: 569595
+Numero de atribuicoes: 1775618
+Tempo de processamento: 2.23726
+
+QuickSort nao Recursivo (100000) - semente [20]:
+Numero de comparacoes: 1126459
+Numero de atribuicoes: 3512528
+Tempo de processamento: 5.94658
+
+QuickSort nao Recursivo (500000) - semente [20]:
+Numero de comparacoes: 6737747
+Numero de atribuicoes: 20879950
+Tempo de processamento: 22.4073
+
+QuickSort nao Recursivo (1000000) - semente [20]:
+Numero de comparacoes: 13781878
+Numero de atribuicoes: 42679143
+Tempo de processamento: 59.807
+
+QuickSort nao Recursivo (1000) - semente [30]:
+Numero de comparacoes: 6936
+Numero de atribuicoes: 22153
+Tempo de processamento: 0.067143
+
+QuickSort nao Recursivo (5000) - semente [30]:
+Numero de comparacoes: 49062
+Numero de atribuicoes: 153833
+Tempo de processamento: 0.233875
+
+QuickSort nao Recursivo (10000) - semente [30]:
+Numero de comparacoes: 111922
+Numero de atribuicoes: 349091
+Tempo de processamento: 0.594448
+
+QuickSort nao Recursivo (50000) - semente [30]:
+Numero de comparacoes: 513984
+Numero de atribuicoes: 1608605
+Tempo de processamento: 2.25711
+
+QuickSort nao Recursivo (100000) - semente [30]:
+Numero de comparacoes: 1095529
+Numero de atribuicoes: 3419906
+Tempo de processamento: 5.8041
+
+QuickSort nao Recursivo (500000) - semente [30]:
+Numero de comparacoes: 7248450
+Numero de atribuicoes: 22412199
+Tempo de processamento: 22.2573
+
+QuickSort nao Recursivo (1000000) - semente [30]:
+Numero de comparacoes: 13016044
+Numero de atribuicoes: 40381525
+Tempo de processamento: 60.199
+
+QuickSort nao Recursivo (1000) - semente [40]:
+Numero de comparacoes: 7082
+Numero de atribuicoes: 22565
+Tempo de processamento: 0.069159
+
+QuickSort nao Recursivo (5000) - semente [40]:
+Numero de comparacoes: 39888
+Numero de atribuicoes: 126319
+Tempo de processamento: 0.237421
+
+QuickSort nao Recursivo (10000) - semente [40]:
+Numero de comparacoes: 96662
+Numero de atribuicoes: 303325
+Tempo de processamento: 0.593545
+
+QuickSort nao Recursivo (50000) - semente [40]:
+Numero de comparacoes: 517168
+Numero de atribuicoes: 1618095
+Tempo de processamento: 2.28774
+
+QuickSort nao Recursivo (100000) - semente [40]:
+Numero de comparacoes: 1121186
+Numero de atribuicoes: 3497019
+Tempo de processamento: 6.01479
+
+QuickSort nao Recursivo (500000) - semente [40]:
+Numero de comparacoes: 6470268
+Numero de atribuicoes: 20077431
+Tempo de processamento: 22.6348
+
+QuickSort nao Recursivo (1000000) - semente [40]:
+Numero de comparacoes: 13533703
+Numero de atribuicoes: 41934648
+Tempo de processamento: 59.7612
+
+QuickSort nao Recursivo (1000) - semente [50]:
+Numero de comparacoes: 8411
+Numero de atribuicoes: 26542
+Tempo de processamento: 0.066012
+
+QuickSort nao Recursivo (5000) - semente [50]:
+Numero de comparacoes: 38562
+Numero de atribuicoes: 122373
+Tempo de processamento: 0.233895
+
+QuickSort nao Recursivo (10000) - semente [50]:
+Numero de comparacoes: 81292
+Numero de atribuicoes: 257209
+Tempo de processamento: 0.585814
+
+QuickSort nao Recursivo (50000) - semente [50]:
+Numero de comparacoes: 517368
+Numero de atribuicoes: 1618739
+Tempo de processamento: 2.26954
+
+QuickSort nao Recursivo (100000) - semente [50]:
+Numero de comparacoes: 1087957
+Numero de atribuicoes: 3397206
+Tempo de processamento: 6.21617
+
+QuickSort nao Recursivo (500000) - semente [50]:
+Numero de comparacoes: 6247045
+Numero de atribuicoes: 19407870
+Tempo de processamento: 23.1378
+
+QuickSort nao Recursivo (1000000) - semente [50]:
+Numero de comparacoes: 13644501
+Numero de atribuicoes: 42266062
+Tempo de processamento: 61.074
+

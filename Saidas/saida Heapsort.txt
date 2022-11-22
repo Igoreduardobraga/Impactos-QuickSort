@@ -1,0 +1,35 @@
+HeapSort (1000) - semente [8]:
+Numero de comparacoes: 11711
+Numero de atribuicoes: 27309
+Tempo de processamento: 0.073816
+
+HeapSort (5000) - semente [8]:
+Numero de comparacoes: 75590
+Numero de atribuicoes: 171213
+Tempo de processamento: 0.244975
+
+HeapSort (10000) - semente [8]:
+Numero de comparacoes: 166337
+Numero de atribuicoes: 372624
+Tempo de processamento: 0.611622
+
+HeapSort (50000) - semente [8]:
+Numero de comparacoes: 1006327
+Numero de atribuicoes: 2212473
+Tempo de processamento: 2.3025
+
+HeapSort (100000) - semente [8]:
+Numero de comparacoes: 2162419
+Numero de atribuicoes: 4723899
+Tempo de processamento: 6.35934
+
+HeapSort (500000) - semente [8]:
+Numero de comparacoes: 12561316
+Numero de atribuicoes: 27072384
+Tempo de processamento: 23.4565
+
+HeapSort (1000000) - semente [8]:
+Numero de comparacoes: 26618641
+Numero de atribuicoes: 57140385
+Tempo de processamento: 63.5612
+

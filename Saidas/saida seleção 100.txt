@@ -1,0 +1,175 @@
+QuickSort Selecao (1000) - semente [10]:
+Numero de comparacoes: 1000
+Numero de atribuicoes: 516
+Tempo de processamento: 0.0353
+
+QuickSort Selecao (5000) - semente [10]:
+Numero de comparacoes: 5001
+Numero de atribuicoes: 2670
+Tempo de processamento: 0.195366
+
+QuickSort Selecao (10000) - semente [10]:
+Numero de comparacoes: 10000
+Numero de atribuicoes: 3504
+Tempo de processamento: 0.504295
+
+QuickSort Selecao (50000) - semente [10]:
+Numero de comparacoes: 50001
+Numero de atribuicoes: 27060
+Tempo de processamento: 2.10141
+
+QuickSort Selecao (100000) - semente [10]:
+Numero de comparacoes: 100000
+Numero de atribuicoes: 66156
+Tempo de processamento: 5.19355
+
+QuickSort Selecao (500000) - semente [10]:
+Numero de comparacoes: 500001
+Numero de atribuicoes: 360978
+Tempo de processamento: 20.8823
+
+QuickSort Selecao (1000000) - semente [10]:
+Numero de comparacoes: 1000001
+Numero de atribuicoes: 179175
+Tempo de processamento: 51.6344
+
+QuickSort Selecao (1000) - semente [20]:
+Numero de comparacoes: 1001
+Numero de atribuicoes: 624
+Tempo de processamento: 0.064476
+
+QuickSort Selecao (5000) - semente [20]:
+Numero de comparacoes: 5001
+Numero de atribuicoes: 3504
+Tempo de processamento: 0.227017
+
+QuickSort Selecao (10000) - semente [20]:
+Numero de comparacoes: 10000
+Numero de atribuicoes: 7473
+Tempo de processamento: 0.545142
+
+QuickSort Selecao (50000) - semente [20]:
+Numero de comparacoes: 50001
+Numero de atribuicoes: 18936
+Tempo de processamento: 2.13846
+
+QuickSort Selecao (100000) - semente [20]:
+Numero de comparacoes: 100000
+Numero de atribuicoes: 74868
+Tempo de processamento: 5.32088
+
+QuickSort Selecao (500000) - semente [20]:
+Numero de comparacoes: 500001
+Numero de atribuicoes: 49140
+Tempo de processamento: 20.9045
+
+QuickSort Selecao (1000000) - semente [20]:
+Numero de comparacoes: 1000001
+Numero de atribuicoes: 636219
+Tempo de processamento: 51.7936
+
+QuickSort Selecao (1000) - semente [30]:
+Numero de comparacoes: 1000
+Numero de atribuicoes: 501
+Tempo de processamento: 0.064813
+
+QuickSort Selecao (5000) - semente [30]:
+Numero de comparacoes: 5001
+Numero de atribuicoes: 1800
+Tempo de processamento: 0.226224
+
+QuickSort Selecao (10000) - semente [30]:
+Numero de comparacoes: 10001
+Numero de atribuicoes: 2160
+Tempo de processamento: 0.542325
+
+QuickSort Selecao (50000) - semente [30]:
+Numero de comparacoes: 50001
+Numero de atribuicoes: 34989
+Tempo de processamento: 2.14114
+
+QuickSort Selecao (100000) - semente [30]:
+Numero de comparacoes: 100001
+Numero de atribuicoes: 74820
+Tempo de processamento: 5.32014
+
+QuickSort Selecao (500000) - semente [30]:
+Numero de comparacoes: 500001
+Numero de atribuicoes: 350760
+Tempo de processamento: 20.9527
+
+QuickSort Selecao (1000000) - semente [30]:
+Numero de comparacoes: 1000001
+Numero de atribuicoes: 257172
+Tempo de processamento: 51.8359
+
+QuickSort Selecao (1000) - semente [40]:
+Numero de comparacoes: 1001
+Numero de atribuicoes: 414
+Tempo de processamento: 0.033634
+
+QuickSort Selecao (5000) - semente [40]:
+Numero de comparacoes: 5001
+Numero de atribuicoes: 690
+Tempo de processamento: 0.194185
+
+QuickSort Selecao (10000) - semente [40]:
+Numero de comparacoes: 10001
+Numero de atribuicoes: 7245
+Tempo de processamento: 0.509767
+
+QuickSort Selecao (50000) - semente [40]:
+Numero de comparacoes: 50001
+Numero de atribuicoes: 16881
+Tempo de processamento: 2.1163
+
+QuickSort Selecao (100000) - semente [40]:
+Numero de comparacoes: 100001
+Numero de atribuicoes: 74112
+Tempo de processamento: 5.25425
+
+QuickSort Selecao (500000) - semente [40]:
+Numero de comparacoes: 500001
+Numero de atribuicoes: 329253
+Tempo de processamento: 20.9207
+
+QuickSort Selecao (1000000) - semente [40]:
+Numero de comparacoes: 1000001
+Numero de atribuicoes: 367743
+Tempo de processamento: 51.7493
+
+QuickSort Selecao (1000) - semente [50]:
+Numero de comparacoes: 1000
+Numero de atribuicoes: 678
+Tempo de processamento: 0.06438
+
+QuickSort Selecao (5000) - semente [50]:
+Numero de comparacoes: 5001
+Numero de atribuicoes: 1704
+Tempo de processamento: 0.23016
+
+QuickSort Selecao (10000) - semente [50]:
+Numero de comparacoes: 10001
+Numero de atribuicoes: 4272
+Tempo de processamento: 0.546778
+
+QuickSort Selecao (50000) - semente [50]:
+Numero de comparacoes: 50000
+Numero de atribuicoes: 37233
+Tempo de processamento: 2.14474
+
+QuickSort Selecao (100000) - semente [50]:
+Numero de comparacoes: 100001
+Numero de atribuicoes: 69717
+Tempo de processamento: 5.35369
+
+QuickSort Selecao (500000) - semente [50]:
+Numero de comparacoes: 500000
+Numero de atribuicoes: 86838
+Tempo de processamento: 20.7702
+
+QuickSort Selecao (1000000) - semente [50]:
+Numero de comparacoes: 1000001
+Numero de atribuicoes: 541812
+Tempo de processamento: 51.3931
+

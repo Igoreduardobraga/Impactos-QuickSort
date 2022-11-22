@@ -7,12 +7,14 @@ using namespace std;
 
 class HeapSort{
     private:
-        Metricas metricas_HeapSort;
+        Metricas metricas;
         
     public:
-        void Constroi(Registro *A, int n);
-        void Refaz(int Esq, int Dir, Registro *A);
-        void imprimir_metricas(ofstream *saida, int n);
+        HeapSort(){}
+        void Troca(Registro *a, Registro *b);
+        void Refaz(Registro A[], int n, int i);
+        void heapSort(Registro A[], int n);
+        void imprimir_metricas(ofstream *saida, int semente, int n);
 };
 
 #endif

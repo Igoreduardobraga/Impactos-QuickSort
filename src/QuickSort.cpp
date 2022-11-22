@@ -1,8 +1,6 @@
 #include "QuickSort.hpp"
 #include <fstream>
 
-Metricas metricas;
-
 QuickSort::QuickSort(){}
 
 QuickSort::~QuickSort(){}
@@ -16,6 +14,9 @@ void QuickSort::Troca(Registro* a, Registro* b){
     *a = *b;
     *b = t;
     metricas.Atribuicoes+=3;
+    
+    ESCREVEMEMLOG((long int)(&(*a)), sizeof(Registro), 0);
+    ESCREVEMEMLOG((long int)(&(*b)), sizeof(Registro), 0);
 }
 
 //************************************QUICKSORT RECURSIVO******************************************//
@@ -28,14 +29,17 @@ void QuickSort::Particao(int Esq, int Dir, int *i, int *j, Registro *A) {
     Registro x, w;
     *i = Esq; *j = Dir;
     x = A[(*i + *j)/2]; /* obtem o pivo x */
+    metricas.Atribuicoes++;
     do
     {
         metricas.Comparacoes++;
         while (x.key > A[*i].key){
+            LEMEMLOG((long int)(&(A[*i].key)), sizeof(int), 0);
             (*i)++;
             metricas.Comparacoes++;
         }
         while (x.key < A[*j].key){
+            LEMEMLOG((long int)(&(A[*j].key)), sizeof(int), 0);
             (*j)--;
             metricas.Comparacoes++;
         }
@@ -43,6 +47,9 @@ void QuickSort::Particao(int Esq, int Dir, int *i, int *j, Registro *A) {
         {
             metricas.Comparacoes++;
             w = A[*i]; A[*i] = A[*j]; A[*j] = w;
+            ESCREVEMEMLOG((long int)(&(A[*i])), sizeof(Registro), 0);
+            ESCREVEMEMLOG((long int)(&(A[*j])), sizeof(Registro), 0);
+
             metricas.Atribuicoes+=3;
             (*i)++; (*j)--;
         }
@@ -87,12 +94,14 @@ void QuickSort::Selecao(Registro A[], int inicio, int fim){
         Min = i;
     for (j = i + 1 ; j < fim; j++){
         if (A[j].key < A[Min].key){
+            LEMEMLOG((long int)(&(A[j].key)), sizeof(int), 0);
+            LEMEMLOG((long int)(&(A[Min].key)), sizeof(int), 0);
             metricas.Comparacoes++;
             Min = j;
         }
     }
     Troca(&A[i], &A[Min]);
-}
+    }
 }
 
 void QuickSort::Ordena_Selecao(Registro A[], int inicio, int fim, int m){
@@ -161,15 +170,18 @@ void QuickSort::Particao_Mediana(Registro A[], int Esq, int Dir, int *i, int *j,
 
     Registro x, w;
     *i = Esq; *j = Dir;
-    x = Mediana(A,Esq,Dir,k);
+    x = Mediana(A,Esq,Dir,*i,*j,k);
+    metricas.Atribuicoes++;
     do
     {
         metricas.Comparacoes++;
         while (x.key > A[*i].key){
+            LEMEMLOG((long int)(&(A[*i].key)), sizeof(int), 0);
             (*i)++;
             metricas.Comparacoes++;
         }
         while (x.key < A[*j].key){
+            LEMEMLOG((long int)(&(A[*j].key)), sizeof(int), 0);
             (*j)--;
             metricas.Comparacoes++;
         }
@@ -177,65 +189,46 @@ void QuickSort::Particao_Mediana(Registro A[], int Esq, int Dir, int *i, int *j,
         {
             metricas.Comparacoes++;
             w = A[*i]; A[*i] = A[*j]; A[*j] = w;
+            ESCREVEMEMLOG((long int)(&(A[*i])), sizeof(Registro), 0);
+            ESCREVEMEMLOG((long int)(&(A[*j])), sizeof(Registro), 0);
+
             metricas.Atribuicoes+=3;
             (*i)++; (*j)--;
         }
     } while (*i <= *j);
 }
 
-Registro QuickSort::Mediana(Registro A[], int inicio, int fim, int qnt_elementos_mediana){
+Registro QuickSort::Mediana(Registro A[], int inicio, int fim, int i, int j, int qntd_elementos_mediana){
     //Descricao: Realiza a mediana de k elementos do vetor A[] escolhidos aleatoriamente
-    //Entrada: A[] (vetor a ser ordenado), inicio, fim, qntd_elementos_mediana (quantidade de elementos que serão escolhidos aleatoriamente para o calculo da mediana)
-    //Saida: A[novo_x]
+    //Entrada: A[] (vetor a ser ordenado), inicio, fim, i, j, qntd_elementos_mediana (quantidade de elementos que serão escolhidos aleatoriamente para o calculo da mediana)
+    //Saida: A[mediana]
 
-    int l = 0;
-
-    int diferenca = fim-inicio+1;
-    if(qnt_elementos_mediana>=diferenca){
-        return A[inicio];
+    if(inicio+qntd_elementos_mediana>=fim){
+        qntd_elementos_mediana = fim-inicio;
     }
-    else
-        l = qnt_elementos_mediana;
-    
-    //Escolhe elementos do vetor A[] aleatoriamente
-    int *posicoes_aleatorias = new int[l];
-    posicoes_aleatorias[0] = inicio+rand()%fim;
 
-    for(int i=1 ; i<l ; i++){
-        int m = inicio+rand()%fim;
 
-        for(int j=0 ; j<i ; j++){
-            if(m==posicoes_aleatorias[j]){
-                i--;
-                break;
-            }
-            if(j == i - 1) {
-                posicoes_aleatorias[i] = m;
-                break;
-            }
-        }
+    int posicoes_mediana[qntd_elementos_mediana];
+    for(int i=0 ; i<qntd_elementos_mediana ; i++){
+        posicoes_mediana[i] = inicio+rand()%qntd_elementos_mediana;
     }
-    int i, j, maximo_index;
 
-    //Ordena o vetor de posições para o calculo da mediana em ordem crescente a partir do metodo selection sort
-    for (i = 0; i < l ; i++){
-        maximo_index = 0;
-        for (j = 1; j < l-i; j++){
-            if (posicoes_aleatorias[maximo_index] < posicoes_aleatorias[j]){
-                metricas.Comparacoes++;
-                maximo_index = j;
+    for (int step = 0; step <qntd_elementos_mediana-1  ; step++) {
+        int min_index = step;
+        for (int i = step + 1; i < qntd_elementos_mediana; i++) {
+            if (posicoes_mediana[i] < posicoes_mediana[min_index]){
+                min_index = i;
             }
         }
+        int temp = posicoes_mediana[step];
+        posicoes_mediana[step] = posicoes_mediana[min_index];
+        posicoes_mediana[min_index] = temp;
+    }
 
-        int aux = posicoes_aleatorias[l-i-1];
-        posicoes_aleatorias[l-i-1] = posicoes_aleatorias[maximo_index];
-        posicoes_aleatorias[maximo_index] = aux;
-        }
-        int novo_i = l/2;
-        int novo_x = posicoes_aleatorias[novo_i];
+    int aux = qntd_elementos_mediana/2;
+    int mediana = posicoes_mediana[aux];
 
-        delete [] posicoes_aleatorias;
-        return A[novo_x];
+    return A[mediana];
 }
 
 //************************************QUICKSORT NAO RECURSIVO************************************
@@ -251,6 +244,7 @@ int QuickSort::Particao_naoRec(Registro A[], int inicio, int fim){
  
     for (int j = inicio ; j <= fim - 1; j++) {
         if (A[j].key <= x.key) {
+            LEMEMLOG((long int)(&(A[j].key)), sizeof(int), 0);
             metricas.Comparacoes++;
             indice_naoRec++;
             Troca(&A[indice_naoRec], &A[j]);
@@ -273,18 +267,14 @@ void QuickSort::Ordena_naoRec(Registro A[], int inicio, int fim){
  
     //colocando os valores de inicio e fim na pilha
     pilha[++topo_pilha] = inicio;
-    metricas.Atribuicoes++;
 
     pilha[++topo_pilha] = fim;
-    metricas.Atribuicoes++;
  
     //Enquanto a pilha não estiver vazia, desempilha
     while (topo_pilha >= 0) {
-        metricas.Comparacoes++;
 
         fim = pilha[topo_pilha--];
         inicio = pilha[topo_pilha--];
-        metricas.Atribuicoes+=2;
  
         // Define o pivô na sua posição ideal
         int particao = Particao_naoRec(A, inicio, fim);
@@ -294,7 +284,6 @@ void QuickSort::Ordena_naoRec(Registro A[], int inicio, int fim){
             metricas.Comparacoes++;
             pilha[++topo_pilha] = inicio;
             pilha[++topo_pilha] = particao - 1;
-            metricas.Atribuicoes+=2;
         }
  
         //Se houver elementos no lado direito do pivô, empilhe-o
@@ -302,7 +291,6 @@ void QuickSort::Ordena_naoRec(Registro A[], int inicio, int fim){
             metricas.Comparacoes++;
             pilha[++topo_pilha] = particao + 1;
             pilha[++topo_pilha] = fim;
-            metricas.Atribuicoes+=2;
         }
     }
     delete [] pilha;
@@ -350,10 +338,8 @@ void QuickSort::Ordena_EmpilhaInteligente(Registro A[], int inicio, int fim){
 
     do{
         if (dir > esq) {
-        metricas.Comparacoes++;
         Particao(esq,dir,&i,&j,A);
             if ((j-esq)>(dir-i)) {
-                metricas.Comparacoes++;
                 item.dir = j;
                 item.esq = esq;
                 pilha.Empilha(item);

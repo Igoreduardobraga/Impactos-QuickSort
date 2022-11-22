@@ -83,9 +83,17 @@ void printArray(int array[], int size) {
 
 // driver code
 int main() {
-  int data[] = {20, 12, 10, 15, 2, 231, 42, 2312, 432, 234, 124, -123, -2, -2424, -2321, 242232123};
-  int size = sizeof(data) / sizeof(data[0]);
-  QuickSort_Selecao(data, size,10);
-  cout << "Sorted array in Acsending Order:\n";
-  printArray(data, size);
+    string temp[200];
+    for(int i=0 ; i<200 ; ++i){
+        temp[i] = 'A' + (char)(rand()%57);
+        cout << temp[i];
+    }
+
+    cout << endl;
+
+    // int data[] = {20, 12, 10, 15, 2, 231, 42, 2312, 432, 234, 124, -123, -2, -2424, -2321, 242232123};
+    // int size = sizeof(data) / sizeof(data[0]);
+    // QuickSort_Selecao(data, size,10);
+    // cout << "Sorted array in Acsending Order:\n";
+    // printArray(data, size);
 }

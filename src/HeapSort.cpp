@@ -1,45 +1,59 @@
 #include "HeapSort.hpp"
 
-void HeapSort::Constroi(Registro *A, int n) {
-    int Esq;
-    Esq = n / 2 + 1;
-    while (Esq > 1) {
-        metricas_HeapSort.Comparacoes++;
-        Esq--;
-        Refaz(Esq, n, A);
+void HeapSort::Troca(Registro *a, Registro *b){
+    //Descricao:: Troca dois elementos de posição
+
+    Registro temp = *a;
+    *a = *b;
+    *b = temp;
+    metricas.Atribuicoes+=3;
+}
+
+void HeapSort::Refaz(Registro A[], int n, int i){
+    //Descicao: Refaz a condiçao do heap
+
+    int maior = i; 
+    int l = 2 * i + 1; 
+    int r = 2 * i + 2; 
+ 
+    if (l < n && A[l].key > A[maior].key){
+        metricas.Comparacoes++;
+        maior = l;
+    }
+ 
+    if (r < n && A[r].key > A[maior].key){
+        metricas.Comparacoes++;
+        maior = r;
+    }
+ 
+    if (maior != i) {
+        Troca(&A[i], &A[maior]);
+ 
+        Refaz(A, n, maior);
     }
 }
 
-void HeapSort::Refaz(int Esq, int Dir, Registro *A){
-    int i, j;
-    Registro x;
-    i = Esq;
-    j = i * 2;
-    x = A[i];
-    while (j <= Dir){
-        metricas_HeapSort.Comparacoes++;
-        if (j < Dir){
-            metricas_HeapSort.Comparacoes++;
-            if (A[j].key < A[j+1].key) {
-                metricas_HeapSort.Comparacoes++;
-                j++;
-        }
-        }
-        if (x.key >= A[j].key){
-            metricas_HeapSort.Comparacoes++;
-            break;
-        }
-        A[i] = A[j];
-        i = j;
-        j = i *2;
-        metricas_HeapSort.Atribuicoes+=3;
+void HeapSort::heapSort(Registro A[], int n){
+    //Descricao: Chamada do algoritmo HeapSort
+
+    //Inicializando as metricas
+    metricas.Atribuicoes=0;
+    metricas.Comparacoes=0;
+    
+    for (int i = n / 2 - 1; i >= 0; i--)
+        Refaz(A, n, i);
+ 
+    
+    for (int i = n - 1; i >= 0; i--) {
+        Troca(&A[0], &A[i]);
+        Refaz(A, i, 0);
     }
-    A[i] = x;
-    metricas_HeapSort.Atribuicoes++;
 }
 
-void HeapSort::imprimir_metricas(ofstream *saida, int n) {
-    *saida << "MergeSort " << n << ":" << endl;
-    *saida << "Numero de comparacoes: " << metricas_HeapSort.Comparacoes << endl;
-    *saida << "Numero de atribuicoes: " << metricas_HeapSort.Atribuicoes << endl;
+void HeapSort::imprimir_metricas(ofstream *saida, int semente, int n) {
+    //Descricao: Imprime as métricas do algoritmo HeapSort
+
+    *saida << "HeapSort (" << n << ") - semente [" << semente << "]:" << endl;
+    *saida << "Numero de comparacoes: " << metricas.Comparacoes << endl;
+    *saida << "Numero de atribuicoes: " << metricas.Atribuicoes << endl;
 }

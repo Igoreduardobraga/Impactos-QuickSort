@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sys/resource.h>
+#include <cmath>
 using namespace std;
 
 void Troca(int* a, int* b){
@@ -10,130 +11,124 @@ void Troca(int* a, int* b){
     *b = t;
 }
 
-//************************************QUICKSORT RECURSIVO******************************************//
+int Mediana(int vetor[], int posicaoInicial, int poiscaoFinal, const int quantidadePossiveisPivos){
 
-void Selecao(int A[], int inicio, int fim){
-
-    for (int step = 0; step < fim - 1; step++) {
-        int min_idx = step;
-        for (int i = step + 1; i < fim; i++) {
-            if (A[i] < A[min_idx])
-                min_idx = i;
-    }
-
-    // put min at the correct position
-    Troca(&A[min_idx], &A[step]);
-    }
-}
-
-int Particao_Selecao(int A[], int inicio, int fim){
-    //Descricao: Realiza a partição do algoritmo QuickSort Seleção
-
-    int x = A[fim];
-    int i = inicio;
-
-    for (int j = inicio; j < fim ; j++) {
-        if (A[j] <= x) {
-        
-            Troca(&A[i], &A[j]);
-            i++;
-        }
-    }
-
-    Troca(&A[i], &A[fim]);
-    return i;
-}
-
-void Ordena_Selecao(int A[], int inicio, int fim, int m){
-    int diferenca = fim-inicio;
-    while(inicio < fim) {
-        if (diferenca < m) {
-            Selecao(A, inicio, fim);
-            break;
-        }
-        else {
-            int x = Particao_Selecao(A, inicio, fim);
-
-            if (x-inicio < fim-x) {
-                Ordena_Selecao(A, inicio, x-1, m);
-                inicio = x+1;
+    unsigned int quantidadePivosSeraoEscolhidos = 0;
+            if(quantidadePossiveisPivos >= (poiscaoFinal - posicaoInicial + 1)) {
+                return vetor[posicaoInicial];
             }
             else {
-                Ordena_Selecao(A, x+1, fim, m);
-                fim = x-1;
+                quantidadePivosSeraoEscolhidos = quantidadePossiveisPivos;
             }
-        }
-    }
+            unsigned int posicoesEscolhidas[quantidadePivosSeraoEscolhidos];
+
+            posicoesEscolhidas[0] = posicaoInicial+rand()%poiscaoFinal;
+            for(unsigned int i = 1; i < quantidadePivosSeraoEscolhidos; i++) {
+                unsigned int possivelPosicao = posicaoInicial+rand()%poiscaoFinal;
+
+                for(unsigned int j = 0; j < i; j++) {
+                    if(possivelPosicao == posicoesEscolhidas[j]) {
+                        i--;
+                        break;
+                    }
+                    
+                    if(j == i - 1) {
+                        posicoesEscolhidas[i] = possivelPosicao;
+                        break;
+                    }
+                }
+            }
+
+            for(unsigned int i = 0; i < quantidadePivosSeraoEscolhidos; i++) {
+                unsigned int indexMaior = 0;
+                for(unsigned int j = 1; j < quantidadePivosSeraoEscolhidos-i; j++) {
+                    if(posicoesEscolhidas[indexMaior] < posicoesEscolhidas[j]) {
+                        indexMaior = j;
+                    }
+                }
+
+                int conteudo = posicoesEscolhidas[quantidadePivosSeraoEscolhidos-i-1];
+                posicoesEscolhidas[quantidadePivosSeraoEscolhidos-i-1] = posicoesEscolhidas[indexMaior];
+                posicoesEscolhidas[indexMaior] = conteudo;
+            }
+
+            unsigned int indexMediana = std::floor(quantidadePivosSeraoEscolhidos / 2.0); 
+            unsigned int indexPivoEscolhido = posicoesEscolhidas[indexMediana];
+
+            return vetor[indexPivoEscolhido];
 }
 
-void QuickSort_Selecao(int A[], int n, int m){
+void particionarCrescente(int vetor[], int posicaoInicial, int poiscaoFinal, int* indexEsquerda, int* indexDireita, const int quantidadePossiveisPivos) {
+            *indexEsquerda = posicaoInicial;
+            *indexDireita = poiscaoFinal;
 
-    Ordena_Selecao(A, 0, n-1, m);
+            int pivo = Mediana(vetor, posicaoInicial, poiscaoFinal, quantidadePossiveisPivos);
+
+            do {
+                
+                while(pivo > vetor[*indexEsquerda]) {
+                    
+                    (*indexEsquerda)++;
+                }
+
+                
+                while(pivo < vetor[*indexDireita]) {
+                    
+                    (*indexDireita)--;
+                }
+
+                if(*indexEsquerda <= *indexDireita) {
+                    int trocaTemporaria = vetor[*indexEsquerda];
+                    vetor[*indexEsquerda] = vetor[*indexDireita];
+                    vetor[*indexDireita] = trocaTemporaria;
+
+                    (*indexEsquerda)++;
+                    (*indexDireita)--;
+                }
+            } while(*indexEsquerda <= *indexDireita);
 }
 
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        cout << arr[i] << " ";
-    cout << endl;
+void quickSortCrescente(int vetor[], int posicaoInicial, int poiscaoFinal, const int quantidadePossiveisPivos) { 
+            int indexEsquerda = 0;
+            int indexDireita = 0;
+
+            particionarCrescente(vetor, posicaoInicial, poiscaoFinal, &indexEsquerda, &indexDireita, quantidadePossiveisPivos);
+
+            if(posicaoInicial < indexDireita) {
+                quickSortCrescente(vetor, posicaoInicial, indexDireita, quantidadePossiveisPivos);
+            }
+
+            if(indexEsquerda < poiscaoFinal) {
+                quickSortCrescente(vetor, indexEsquerda, poiscaoFinal, quantidadePossiveisPivos);
+            }
+
+            return;
+}
+
+void ordenarCrescente(int vetor[], const unsigned int tamanho, const int quantidadePossiveisPivos) {
+    quickSortCrescente(vetor, 0, tamanho - 1, quantidadePossiveisPivos);
+    return;
 }
 
 int main(){
 
-    struct rusage resources;
-    int rc;
-    double utime, stime, total_time;
-    int arr[20];
+    int *a = new int[1000000];
 
-    if((rc = getrusage(RUSAGE_SELF, &resources)) != 0)
-            perror("getrusage falhou");
+    ordenarCrescente(a,1000000,3);
 
-    for(int i=0; i<20 ; i++){
-        arr[i] = rand()%100;
-        cout << arr[i] << " ";
+    for(int i=0 ; i<1000 ; i++){
+        cout << a[i] << " ";
     }
     cout << endl;
 
-    QuickSort_Selecao(arr, 20, 10);
-
-    utime = (double) resources.ru_utime.tv_sec + 1.e-6 * (double) resources.ru_utime.tv_usec;
-    stime = (double) resources.ru_stime.tv_sec + 1.e-6 * (double) resources.ru_stime.tv_usec;
-    total_time = utime+stime;
-
-    cout << "Sorted array: \n";
-    printArray(arr, 20);
-    cout << "Tempo de processamento : " << total_time << endl;
-
+    delete [] a;
     
     return 0;
 }
 
 
-// int *posicoes_mediana = new int[qnt_elementos_mediana];
-//         posicoes_mediana[0] = inicio+rand()%fim;
-//         for(int i=1 ; i<qnt_elementos_mediana ; i++){
-//             posicoes_mediana[i] = inicio+rand()%fim;
-//         }
 
-//         for (int step = 0; step <qnt_elementos_mediana  ; step++) {
-//             int min_idx = step;
-//         for (int i = step + 1; i < qnt_elementos_mediana; i++) {
-//             if (posicoes_mediana[i] < posicoes_mediana[min_idx])
-//                 min_idx = i;
-//         }
-
-//         int temp = posicoes_mediana[min_idx];
-//         posicoes_mediana[min_idx] = posicoes_mediana[step];
-//         posicoes_mediana[step] = temp;
-//         }
-        
-//     int aux = qnt_elementos_mediana/2.0;
-//     int mediana = posicoes_mediana[aux];
-//     delete [] posicoes_mediana;
-//     return A[mediana];
-
-// unsigned int quantidadePivosSeraoEscolhidos = 0;
+//     unsigned int quantidadePivosSeraoEscolhidos = 0;
 //             if(quantidadePossiveisPivos >= (poiscaoFinal - posicaoInicial + 1)) {
 //                 return vetor[posicaoInicial];
 //             }
@@ -166,3 +161,49 @@ int main(){
 
 //             delete[] posicoesEscolhidas;
 //             return vetor[indexPivoEscolhido];
+// }
+
+
+
+// int diferenca = fim-inicio+1;
+//     if(qntd_elementos_mediana>=diferenca){
+//         return A[inicio];
+//     }
+
+//     int *posicoes_aleatorias = new int[qntd_elementos_mediana];
+//     posicoes_aleatorias[0] = inicio+rand()%fim;
+
+//     for(int i=1 ; i<qntd_elementos_mediana ; i++){
+//         int m = inicio+rand()%fim;
+
+//         for(int j=0 ; j<i ; j++){
+//             if(m==posicoes_aleatorias[j]){
+//                 i--;
+//                 break;
+//             }
+//             if(j == i - 1) {
+//                 posicoes_aleatorias[i] = m;
+//                 break;
+//             }
+//         }
+//     }
+//     int i, j, maximo_index;
+
+//     //Ordena o vetor de posições para o calculo da mediana em ordem crescente a partir do metodo selection sort
+//     for (i = 0; i < qntd_elementos_mediana ; i++){
+//         maximo_index = 0;
+//         for (j = 1; j < qntd_elementos_mediana-i; j++){
+//             if (posicoes_aleatorias[maximo_index] < posicoes_aleatorias[j]){
+//                 maximo_index = j;
+//             }
+//         }
+
+//         int aux = posicoes_aleatorias[qntd_elementos_mediana-i-1];
+//         posicoes_aleatorias[qntd_elementos_mediana-i-1] = posicoes_aleatorias[maximo_index];
+//         posicoes_aleatorias[maximo_index] = aux;
+//         }
+//         int novo_i = qntd_elementos_mediana/2;
+//         int novo_x = posicoes_aleatorias[novo_i];
+
+//         delete [] posicoes_aleatorias;
+//         return A[novo_x];

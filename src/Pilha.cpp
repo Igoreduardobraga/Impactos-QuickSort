@@ -1,6 +1,6 @@
 #include "Pilha.hpp"
 
-Pilha::Pilha() //construtor //dynamic stack
+Pilha::Pilha() //construtor
 {
     NoTopo = NULL;
 }
@@ -14,13 +14,15 @@ Pilha::~Pilha(){ //destrutor
     }
 }
 
-bool Pilha::estaVazio() //isempty
+bool Pilha::estaVazio()
 {
+     //Descricao: Verifica se a pilha esta vazia
     return (NoTopo == NULL);
 }
 
-bool Pilha::estaCheio() //tem memória //isfull
+bool Pilha::estaCheio()
 {
+    //Descricao: Verifica se a pilha esta cheia
     No* NoNovo;
     try{
         NoNovo = new No;
@@ -31,8 +33,10 @@ bool Pilha::estaCheio() //tem memória //isfull
     }
 }
 
-void Pilha::Empilha(Item item) //push
+void Pilha::Empilha(Item item)
 {
+    //Descricao: Adiciona um item na pilha
+
     if (estaCheio()){
         cout << "A Pilha esta cheia!\n";
     } else{
@@ -43,8 +47,9 @@ void Pilha::Empilha(Item item) //push
     }
 }
 
-Item Pilha::Desempilha() //pop
+Item Pilha::Desempilha()
 {
+    //Descricao: Remove um item da pilha
         No* NoTemp;
         NoTemp = NoTopo;
         Item item = NoTopo->valor;
